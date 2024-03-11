@@ -1,10 +1,11 @@
 {
-  "name": "changes",
+  "name": "visualsource.github.io",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.html",
   "scripts": {
-    "build": "pnpm -r --parallel run build"
+    "build": "pnpm -r --parallel run build",
+    "build-link": "node ./scripts/github-pages.mjs"
   },
   "keywords": [],
   "author": "",
