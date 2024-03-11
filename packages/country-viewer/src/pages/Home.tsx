@@ -1,10 +1,10 @@
-import CountryCard, { type Country } from "@/components/CountyCard";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from 'use-debounce';
-import { useState } from "react";
 import { Search } from "lucide-react";
+import { useState } from "react";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import CountryCard, { type Country } from "@/components/CountyCard";
+import { Input } from "@/components/ui/input";
 
 const API_ROOT = "https://restcountries.com/v3.1/";
 

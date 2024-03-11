@@ -1,10 +1,12 @@
 import { defineConfig } from "vite";
 
+const ID = "/multi-step-form";
+
 export default defineConfig(({ command }) => {
   return {
-    base: command === "build" ? "/multi-step-form" : "/",
+    base: command === "build" ? ID : "/",
     build: {
-      outDir: "../../dist/mutli-step-form",
+      outDir: `../../dist${ID}`,
       emptyOutDir: true,
     },
   };

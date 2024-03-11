@@ -8,6 +8,6 @@
     "build-link": "node ./scripts/github-pages.mjs"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Collin Blosser",
+  "license": "MIT"
 }
