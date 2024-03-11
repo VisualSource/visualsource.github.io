@@ -97,10 +97,20 @@ importers:
         version: 5.1.5(@types/node@20.11.25)
 
   packages/multi-step-form:
+    dependencies:
+      '@caneara/iodine':
+        specifier: ^8.5.0
+        version: 8.5.0
+      alpinejs:
+        specifier: ^3.13.7
+        version: 3.13.7
     devDependencies:
       '@tailwindcss/forms':
         specifier: ^0.5.7
         version: 0.5.7(tailwindcss@3.4.1)
+      '@types/alpinejs':
+        specifier: ^3.13.7
+        version: 3.13.7
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.18(postcss@8.4.35)
@@ -444,6 +454,10 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
     dev: true
+
+  /@caneara/iodine@8.5.0:
+    resolution: {integrity: sha512-drPlPjJTrFsgbWkxFbvgl/Gzfz9NwSzBSC/QTU2i2lSa4Ij8n3uDPpZrHt1aDSwhAWP5U+EzAw6+cnB0+uznuQ==}
+    dev: false
 
   /@esbuild/aix-ppc64@0.19.12:
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -1374,6 +1388,10 @@ packages:
       path-browserify: 1.0.1
     dev: true
 
+  /@types/alpinejs@3.13.7:
+    resolution: {integrity: sha512-9VH1N/414xJy9FJXXAfwQjbX+i+Qr9Xs8xAI1xBdD79X2EvHnAen5qRiSsbJuhqQJ9J798W3CUva21EidO3krw==}
+    dev: true
+
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
@@ -1591,6 +1609,16 @@ packages:
       - supports-color
     dev: true
 
+  /@vue/reactivity@3.1.5:
+    resolution: {integrity: sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==}
+    dependencies:
+      '@vue/shared': 3.1.5
+    dev: false
+
+  /@vue/shared@3.1.5:
+    resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==}
+    dev: false
+
   /acorn-jsx@5.3.2(acorn@8.11.3):
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -1622,6 +1650,12 @@ packages:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
     dev: true
+
+  /alpinejs@3.13.7:
+    resolution: {integrity: sha512-rcTyjTANbsePq1hb7eSekt3qjI94HLGeO6JaRjCssCVbIIc+qBrc7pO5S/+2JB6oojIibjM6FA+xRI3zhGPZIg==}
+    dependencies:
+      '@vue/reactivity': 3.1.5
+    dev: false
 
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}

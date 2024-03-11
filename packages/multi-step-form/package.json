@@ -10,10 +10,15 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
+    "@types/alpinejs": "^3.13.7",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
+  },
+  "dependencies": {
+    "@caneara/iodine": "^8.5.0",
+    "alpinejs": "^3.13.7"
   }
 }
