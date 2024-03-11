@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  packages/countryViewer:
+  packages/country-viewer:
     dependencies:
       '@radix-ui/react-select':
         specifier: ^2.0.0
