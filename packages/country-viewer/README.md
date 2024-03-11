@@ -37,7 +37,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://visualsource.github.io/county-viewer)
+- Live Site URL: [https://visualsource.github.io/county-viewer](https://visualsource.github.io/county-viewer)
 
 ## My process
 

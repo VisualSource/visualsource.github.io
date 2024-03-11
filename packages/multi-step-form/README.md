@@ -37,7 +37,8 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://visualsource.github.io/multi-step-form)
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [https://visualsource.github.io/multi-step-form](https://visualsource.github.io/multi-step-form)
 
 ## My process
 
