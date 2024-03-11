@@ -11,7 +11,7 @@ import Home from './pages/Home';
 const client = new QueryClient();
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<AppLayout />}>
+    <Route path={import.meta.env.BASE_URL} element={<AppLayout />}>
       <Route index element={<Home />} />
       <Route path="view/:id" element={<ViewCountry />} />
     </Route>
