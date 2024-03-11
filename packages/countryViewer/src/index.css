@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+Light 
+Text: 200, 15%, 8%
+elements: 0, 0%, 100%
+input: 0, 0%, 52%
+
+dark 
+Text: 0, 0%, 100%
+elements: 209, 23%, 22%
+input 
+
+*/
+@layer base {
+  :root {
+    --font-sans: "Nunito Sans";
+    --background: 0, 0%, 98%;
+    --foreground: 200, 15%, 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 200, 15%, 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 200, 15%, 8%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 200, 15%, 8%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 207, 26%, 17%;
+    --foreground: 0, 0%, 100%;
+    --card: 209, 23%, 22%;
+    --card-foreground: 0, 0%, 100%;
+    --popover: 209, 23%, 22%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+  }
+}
+
+@layer components {
+  .show-ring:has(> input:focus-visible) {
+    @apply ring-offset-background ring-2 ring-ring ring-offset-2;
+  }
+  .outline-hidden {
+    outline: none;
+    outline-width: 0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html,
+  body,
+  #root {
+    @apply h-svh;
+  }
+
+  #root {
+    @apply flex flex-col;
+  }
+}

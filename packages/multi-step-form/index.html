@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./src/assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Multi-step form</title>
+
+    <link rel="stylesheet" href="./src/style.css" />
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body class="h-screen bg-magnolia">
+    <div class="lg:px-52 lg:py-28 flex h-full">
+      <div
+        class="bg-white h-full w-full rounded-xl shadow flex flex-col relative md:flex-row md:px-4 md:py-4"
+      >
+        <nav
+          class="flex h-1/4 w-full justify-center flex-shrink-0 md:flex-col md:h-full md:w-4/12 lg:w-3/12"
+        >
+          <img
+            class="md:hidden w-full h-full object-cover"
+            src="./src/assets/images/bg-sidebar-mobile.svg"
+          />
+          <img
+            class="hidden md:block h-full w-full object-cover rounded-xl"
+            src="./src/assets/images/bg-sidebar-desktop.svg"
+          />
+
+          <ul
+            class="gap-4 mt-4 absolute hidden md:block top-0 left-0 px-8 md:px-12 space-y-6"
+          >
+            <template x-data x-for="(item,index) in $store.formState.navigate">
+              <li class="flex gap-4 items-center">
+                <div
+                  x-data
+                  :class="$store.formState.is_state(item) ? 'bg-light-blue' : 'text-white border'"
+                  class="h-8 w-8 flex items-center justify-center rounded-full text-center transition-colors"
+                >
+                  <span class="pb-0.5 font-medium" x-text="index + 1"></span>
+                </div>
+                <div>
+                  <span class="text-xs text-cool-gray font-bold"
+                    >STEP <span x-text="index + 1"></span
+                  ></span>
+                  <h1
+                    class="text-light-gray font-bold text-sm -mt-1"
+                    x-text="$store.formState.display_name[index]"
+                  ></h1>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </nav>
+        <main
+          class="flex-1 flex flex-col justify-end md:justify-between md:px-14 xl:px-32"
+        >
+          <div
+            class="absolute top-0 flex flex-col gap-11 items-center w-full md:h-full md:relative"
+          >
+            <ul class="gap-4 mt-8 flex justify-center md:hidden">
+              <template
+                x-data
+                x-for="(item,index) in $store.formState.navigate"
+              >
+                <li>
+                  <button
+                    x-data
+                    :class="$store.formState.is_state(item) ? 'bg-light-blue' : 'text-white border'"
+                    class="h-8 w-8 flex items-center justify-center rounded-full text-center transition-colors"
+                  >
+                    <span class="pb-0.5 font-medium" x-text="index + 1"></span>
+                  </button>
+                </li>
+              </template>
+            </ul>
+
+            <div
+              class="bg-white rounded-xl shadow md:shadow-none flex flex-col px-6 pt-8 pb-8 mx-4 md:pb-0 md:px-0 md:mx-0 md:w-full md:h-full"
+            >
+              <!--Step data-->
+              <form
+                novalidate
+                id="personal-info"
+                x-data="formdata"
+                x-show="$store.formState.page === 'info'"
+                class="h-fit flex flex-col"
+                @submit.prevent="submit"
+              >
+                <h1
+                  class="text-2xl font-bold tracking-tight text-marine-blue md:text-4xl"
+                >
+                  Personal info
+                </h1>
+                <p class="text-cool-gray text-balance mt-2 text-base">
+                  Please provide your name, email address, and phone number.
+                </p>
+                <!--
+                  https://stackoverflow.com/questions/47307199/css-highlight-label-before-an-invalid-input
+                -->
+                <fieldset class="group">
+                  <label class="flex justify-between w-full py-1 mt-4">
+                    <span
+                      class="text-marine-blue text-sm tracking-tight font-medium"
+                      >Name</span
+                    ><span
+                      x-text="fields.name"
+                      class="invisible group-invalid:visible text-strawberry-red text-sm"
+                    ></span>
+                  </label>
+                  <input
+                    class="rounded placeholder:text-cool-gray border-light-gray focus:border-cool-gray focus:ring-cool-gray invalid:border-strawberry-red w-full invalid:ring-strawberry-red focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
+                    id="form-name"
+                    type="text"
+                    placeholder="e.g. Stephen King Email"
+                  />
+                </fieldset>
+
+                <fieldset class="group">
+                  <label class="flex justify-between py-1 mt-2">
+                    <span
+                      class="block text-sm font-medium text-marine-blue tracking-tight"
+                      >Email Address</span
+                    >
+                    <span
+                      class="invisible group-invalid:visible text-strawberry-red text-sm"
+                      x-text="fields.email"
+                    ></span>
+                  </label>
+                  <input
+                    class="rounded placeholder:text-cool-gray border-light-gray invalid:border-strawberry-red w-full invalid:ring-strawberry-red focus:border-cool-gray focus:ring-cool-gray focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
+                    id="form-address"
+                    type="email"
+                    placeholder="e.g. stephenking@lorem.com"
+                  />
+                </fieldset>
+
+                <fieldset class="group">
+                  <label class="flex justify-between py-1 mt-2">
+                    <span
+                      class="block text-sm font-medium text-marine-blue tracking-tight"
+                      >Phone Number</span
+                    >
+                    <span
+                      class="invisible group-invalid:visible text-strawberry-red text-sm"
+                      x-text="fields.phone"
+                    ></span>
+                  </label>
+                  <input
+                    class="rounded placeholder:text-cool-gray border-light-gray invalid:border-strawberry-red invalid:ring-strawberry-red w-full focus:border-cool-gray focus:ring-cool-gray focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
+                    id="form-phone"
+                    type="tel"
+                    placeholder="e.g. +1 234 567 890"
+                  />
+                </fieldset>
+              </form>
+
+              <!-- Step 2 start -->
+              <div
+                class="flex flex-col"
+                x-cloak
+                x-data
+                x-show="$store.formState.page === 'plan'"
+              >
+                <h1
+                  class="text-2xl font-bold tracking-tight text-marine-blue md:text-4xl"
+                >
+                  Select your plan
+                </h1>
+                <p class="text-cool-gray font-normal mt-2">
+                  You have the option of monthly or yearly billing.
+                </p>
+
+                <div
+                  class="flex flex-col space-y-3 mt-5 md:flex-row md:space-y-0 md:space-x-3 w-full"
+                  x-data
+                >
+                  <template x-for="(item,index) in $store.formState.plans">
+                    <button
+                      class="flex items-center border rounded-md px-3 py-4 transition-colors md:flex-col md:items-start md:w-full hover:bg-cool-gray hover:bg-opacity-5 hover:shadow-sm"
+                      :class="$store.formState.plan.selected === index ? 'border-purplish-blue bg-purplish-blue hover:bg-purplish-blue hover:bg-opacity-15 bg-opacity-5' : 'border-light-gray hover:border-purplish-blue'"
+                      @click="$store.formState.set_selected(index)"
+                    >
+                      <svg
+                        x-show="index === 0"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                      >
+                        <g fill="none" fill-rule="evenodd">
+                          <circle cx="20" cy="20" r="20" fill="#FFAF7E" />
+                          <path
+                            fill="#FFF"
+                            fill-rule="nonzero"
+                            d="M24.995 18.005h-3.998v5.998h-2v-5.998H15a1 1 0 0 0-1 1V29a1 1 0 0 0 1 1h9.995a1 1 0 0 0 1-1v-9.995a1 1 0 0 0-1-1Zm-5.997 8.996h-2v-1.999h2v2Zm2-11.175a2.999 2.999 0 1 0-2 0v2.18h2v-2.18Z"
+                          />
+                        </g>
+                      </svg>
+                      <svg
+                        x-show="index === 1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                      >
+                        <g fill="none" fill-rule="evenodd">
+                          <circle cx="20" cy="20" r="20" fill="#F9818E" />
+                          <path
+                            fill="#FFF"
+                            fill-rule="nonzero"
+                            d="M25.057 15H14.944C12.212 15 10 17.03 10 19.885c0 2.857 2.212 4.936 4.944 4.936h10.113c2.733 0 4.943-2.08 4.943-4.936S27.79 15 25.057 15ZM17.5 20.388c0 .12-.108.237-.234.237h-1.552v1.569c0 .126-.138.217-.259.217H14.5c-.118 0-.213-.086-.213-.203v-1.583h-1.569c-.126 0-.217-.139-.217-.26v-.956c0-.117.086-.213.202-.213h1.584v-1.554c0-.125.082-.231.203-.231h.989c.12 0 .236.108.236.234v1.551h1.555c.125 0 .231.083.231.204v.988Zm5.347.393a.862.862 0 0 1-.869-.855c0-.472.39-.856.869-.856.481 0 .87.384.87.856 0 .471-.389.855-.87.855Zm1.9 1.866a.86.86 0 0 1-.87-.852.86.86 0 0 1 .87-.855c.48 0 .87.38.87.855a.86.86 0 0 1-.87.852Zm0-3.736a.862.862 0 0 1-.87-.854c0-.472.39-.856.87-.856s.87.384.87.856a.862.862 0 0 1-.87.854Zm1.899 1.87a.862.862 0 0 1-.868-.855c0-.472.389-.856.868-.856s.868.384.868.856a.862.862 0 0 1-.868.855Z"
+                          />
+                        </g>
+                      </svg>
+                      <svg
+                        x-show="index === 2"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
+                      >
+                        <g fill="none" fill-rule="evenodd">
+                          <circle cx="20" cy="20" r="20" fill="#483EFF" />
+                          <path
+                            fill="#FFF"
+                            fill-rule="nonzero"
+                            d="M26.666 13H13.334A3.333 3.333 0 0 0 10 16.333v7.193a3.447 3.447 0 0 0 2.14 3.24c1.238.5 2.656.182 3.56-.8L18.52 23h2.96l2.82 2.966a3.2 3.2 0 0 0 3.56.8 3.447 3.447 0 0 0 2.14-3.24v-7.193A3.333 3.333 0 0 0 26.666 13Zm-9.333 6H16v1.333a.667.667 0 0 1-1.333 0V19h-1.333a.667.667 0 0 1 0-1.334h1.333v-1.333a.667.667 0 1 1 1.333 0v1.333h1.333a.667.667 0 1 1 0 1.334Zm7.333 2a2.667 2.667 0 1 1 0-5.333 2.667 2.667 0 0 1 0 5.333ZM26 18.333a1.333 1.333 0 1 1-2.667 0 1.333 1.333 0 0 1 2.667 0Z"
+                          />
+                        </g>
+                      </svg>
+                      <div
+                        class="flex flex-col items-start ml-4 md:ml-0 md:mt-16"
+                      >
+                        <h3
+                          class="text-marine-blue font-bold"
+                          x-text="item.name"
+                        ></h3>
+                        <p
+                          class="text-cool-gray text-sm"
+                          x-text="$store.formState.format_price(item.price)"
+                        ></p>
+                        <span
+                          x-show="!$store.formState.price_mouthly"
+                          class="text-marine-blue text-sm font-medium"
+                          >2 months free</span
+                        >
+                      </div>
+                    </button>
+                  </template>
+                </div>
+
+                <div
+                  x-data
+                  class="bg-alabaster px-2 py-3 flex justify-center gap-6 items-center mt-6 md:mt-10"
+                >
+                  <span
+                    :class="!$store.formState.price_mouthly ? 'text-cool-gray' : 'text-marine-blue'"
+                    class="font-medium"
+                    >Monthly</span
+                  >
+                  <button
+                    type="button"
+                    role="switch"
+                    @click="$store.formState.toggle()"
+                    class="peer inline-flex pl-0.5 h-5 w-10 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 bg-marine-blue"
+                  >
+                    <span
+                      :class="!$store.formState.price_mouthly ? 'translate-x-5':'translate-x-0'"
+                      class="pointer-events-none block h-3 w-3 rounded-full bg-white shadow-lg ring-0 transition-transform"
+                    ></span>
+                  </button>
+                  <span
+                    :class="!$store.formState.price_mouthly ? 'text-marine-blue': 'text-cool-gray'"
+                    class="font-medium text-cool-gray"
+                    >Yearly</span
+                  >
+                </div>
+              </div>
+              <!-- Step 2 end -->
+
+              <!-- Step 3 start -->
+              <div
+                class="h-fit flex flex-col"
+                x-data
+                x-cloak
+                x-show="$store.formState.page === 'add-ons'"
+              >
+                <h1
+                  class="text-2xl font-bold tracking-tight text-marine-blue md:text-4xl"
+                >
+                  Pick add-ons
+                </h1>
+                <p class="text-cool-gray mt-2 text-base">
+                  Add-ons help enhance your gaming experience.
+                </p>
+
+                <div class="space-y-4">
+                  <template x-for="(addon,index) in $store.formState.addons">
+                    <div
+                      class="flex items-center border rounded-md py-2 px-3 md:py-5 hover:shadow-sm"
+                      :class="$store.formState.has_addon(index) ? 'border-purplish-blue bg-purplish-blue bg-opacity-5 hover:bg-opacity-10' : 'border-cool-gray hover:bg-cool-gray hover:border-purplish-blue hover:bg-opacity-5'"
+                    >
+                      <button
+                        role="checkbox"
+                        @click="$store.formState.toggle_addon(index)"
+                        :class="$store.formState.has_addon(index) ? 'bg-purplish-blue' : 'border border-cool-gray'"
+                        class="h-5 w-5 rounded flex items-center justify-center"
+                      >
+                        <svg
+                          x-show="$store.formState.has_addon(index)"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="12"
+                          height="9"
+                          viewBox="0 0 12 9"
+                        >
+                          <path
+                            fill="none"
+                            stroke="#FFF"
+                            stroke-width="2"
+                            d="m1 4 3.433 3.433L10.866 1"
+                          />
+                        </svg>
+                      </button>
+                      <div class="ml-4">
+                        <h3
+                          class="text-marine-blue font-medium"
+                          x-text="addon.name"
+                        ></h3>
+                        <p
+                          class="text-xs text-cool-gray"
+                          x-text="addon.description"
+                        ></p>
+                      </div>
+                      <span
+                        class="text-sm ml-auto text-purplish-blue"
+                        x-text="$store.formState.format_price(addon.price,true)"
+                      ></span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+              <!-- Step 3 end -->
+              <!-- Step 4 start -->
+              <div
+                class="h-fit flex flex-col"
+                x-cloak
+                x-data
+                x-show="$store.formState.page === 'summary'"
+              >
+                <h1
+                  class="text-2xl font-bold tracking-tight text-marine-blue md:text-4xl"
+                >
+                  Finishing up
+                </h1>
+                <p class="text-cool-gray mt-2 text-base">
+                  Double-check everything looks OK before confirming.
+                </p>
+
+                <div class="bg-magnolia rounded-md mt-4 p-4 shrink-0 md:p-6">
+                  <div class="flex justify-between items-center">
+                    <div>
+                      <h3
+                        class="text-marine-blue font-bold text-sm md:text-lg"
+                        x-text="$store.formState.get_selected_plan_name()"
+                      ></h3>
+                      <button
+                        @click="$store.formState.goto(1)"
+                        class="underline text-cool-gray text-sm md:text-base font-medium tracking-tighter hover:text-purplish-blue"
+                      >
+                        Change
+                      </button>
+                    </div>
+                    <span
+                      class="text-marine-blue font-bold text-sm md:text-lg"
+                      x-text="$store.formState.get_selected_plan_price()"
+                    ></span>
+                  </div>
+                  <hr class="my-3" />
+                  <ul class="space-y-2 md:space-y-4">
+                    <template x-for="item in $store.formState.get_addons()">
+                      <li class="flex justify-between text-sm md:text-base">
+                        <span class="text-cool-gray" x-text="item.name"></span>
+                        <span
+                          class="text-marine-blue font-medium text-opacity-75"
+                          x-text="$store.formState.format_price(item.price,true)"
+                        ></span>
+                      </li>
+                    </template>
+                  </ul>
+                </div>
+
+                <div class="flex items-center justify-between pt-4 px-4 mt-4">
+                  <span
+                    class="text-cool-gray text-sm md:text-base font-medium tracking-tight"
+                    x-text="$store.formState.price_mouthly ? 'Total (pre month)' : 'Total (pre year)'"
+                  ></span>
+                  <span
+                    class="text-purplish-blue font-bold text-lg md:text-xl"
+                    x-text="$store.formState.get_total()"
+                  ></span>
+                </div>
+              </div>
+              <!-- Step 4 end -->
+              <!-- Step 5 start -->
+              <div
+                class="flex flex-col justify-center items-center gap-4 h-full"
+                x-data
+                x-cloak
+                x-show="$store.formState.page === 'thanks'"
+              >
+                <svg
+                  class="h-14 w-14 md:h-20 md:w-20 mt-12 md:mt-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="80"
+                  height="80"
+                  viewBox="0 0 80 80"
+                >
+                  <g fill="none">
+                    <circle cx="40" cy="40" r="40" fill="#F9818E" />
+                    <path
+                      fill="#E96170"
+                      d="M48.464 79.167c.768-.15 1.53-.321 2.288-.515a40.04 40.04 0 0 0 3.794-1.266 40.043 40.043 0 0 0 3.657-1.63 40.046 40.046 0 0 0 12.463-9.898A40.063 40.063 0 0 0 78.3 51.89c.338-1.117.627-2.249.867-3.391L55.374 24.698a21.6 21.6 0 0 0-15.332-6.365 21.629 21.629 0 0 0-15.344 6.365c-8.486 8.489-8.486 22.205 0 30.694l23.766 23.775Z"
+                    />
+                    <path
+                      fill="#FFF"
+                      d="M40.003 18.333a21.58 21.58 0 0 1 15.31 6.351c8.471 8.471 8.471 22.158 0 30.63-8.47 8.47-22.156 8.47-30.627 0-8.47-8.472-8.47-22.159 0-30.63a21.594 21.594 0 0 1 15.317-6.35Zm9.865 15c-.316.028-.622.15-.872.344l-12.168 9.13-5.641-5.642c-1.224-1.275-3.63 1.132-2.356 2.356l6.663 6.663c.56.56 1.539.63 2.173.156l13.326-9.995c1.122-.816.43-2.993-.956-3.013a1.666 1.666 0 0 0-.17 0Z"
+                    />
+                  </g>
+                </svg>
+                <h1
+                  class="text-marine-blue text-2xl font-bold -mb-2 md:mt-2 md:text-3xl"
+                >
+                  Thank you!
+                </h1>
+                <p class="text-cool-gray text-center mb-12 md:mt-2">
+                  Thanks for confirming your subscription! We hope you have fun
+                  using our platform. If you ever need support, please feel free
+                  to email us at support@loremgaming.com.
+                </p>
+              </div>
+              <!-- Step 5 end -->
+            </div>
+          </div>
+
+          <div
+            x-data
+            x-show="$store.formState.page !== 'thanks'"
+            class="bg-white h-[70px] flex-shrink-0 flex justify-between items-center px-4 md:px-0"
+          >
+            <div x-data x-show="$store.formState.page === 'info'"></div>
+            <button
+              x-data
+              x-cloak
+              x-show="$store.formState.page !== 'info'"
+              @click="$store.formState.prev()"
+              class="text-cool-gray font-medium"
+            >
+              Go Back
+            </button>
+            <button
+              x-cloak
+              form="personal-info"
+              x-show="$store.formState.page !== 'info'"
+              x-data
+              x-text="$store.formState.page === 'summary' ? 'Confirm' : 'Next Step'"
+              :class="$store.formState.page === 'summary' ? 'bg-purplish-blue':'bg-marine-blue' "
+              class="text-magnolia rounded-md font-bold px-4 py-2.5 md:px-6 md:py-3 text-sm hover:opacity-75"
+            ></button>
+            <!--This just submits the form on every click and is not handled by the button its self.-->
+            <button
+              form="personal-info"
+              x-show="$store.formState.page === 'info'"
+              x-data
+              class="text-magnolia rounded-md font-bold px-4 py-2.5 md:px-6 md:py-3 text-sm hover:opacity-75 bg-marine-blue"
+            >
+              Next Step
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@caneara/iodine@8.5.0/dist/iodine.min.umd.js"
+      defer
+    ></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="./src/main.ts"></script>
+  </body>
+</html>
