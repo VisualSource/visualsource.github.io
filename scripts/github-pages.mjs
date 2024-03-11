@@ -53,7 +53,7 @@ try {
   const links = [];
 
   for (const project of projects) {
-    const url = `/${project}`;
+    const url = `/${project}/index.html`;
     const name = project
       .split("-")
       .map((e, i) => {
