@@ -15,7 +15,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="view/:id" element={<ViewCountry />} />
     </Route>
-  )
+  ), { basename: import.meta.env.BASE_URL }
 );
 
 const theme = localStorage.getItem("county-viewer-theme") ?? "system";
@@ -36,7 +36,7 @@ switch (theme) {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
-      <RouterProvider basename={import.meta.env.BASE_URL} router={router} />
+      <RouterProvider router={router} />
     </QueryClientProvider>
   </React.StrictMode>,
 )
