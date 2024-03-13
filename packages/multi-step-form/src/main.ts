@@ -52,12 +52,12 @@ iodine.setErrorMessage("phone", "[FIELD] is not a valid phone number");
 Alpine.store("formState", {
   plan: {
     selected: 0,
-    addons: new Set(),
+    addons: new Set([]),
   },
   display_name: ["YOUR INFO", "SELECT PLAN", "ADD-ONS", "SUMMARY"],
   pages: ["info", "plan", "add-ons", "summary", "thanks"],
   price_mouthly: true,
-  page: "info",
+  page: "thanks",
   page_idx: 0,
   plans: [{
     name: "Arcade",

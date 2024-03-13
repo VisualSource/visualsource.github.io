@@ -37,10 +37,12 @@
           <img
             class="md:hidden w-full h-full object-cover"
             src="./src/assets/images/bg-sidebar-mobile.svg"
+            alt="background module"
           />
           <img
             class="hidden md:block h-full w-full object-cover rounded-xl"
             src="./src/assets/images/bg-sidebar-desktop.svg"
+            alt="background desktop"
           />
 
           <ul
@@ -80,13 +82,13 @@
                 x-for="(item,index) in $store.formState.navigate"
               >
                 <li>
-                  <button
+                  <div
                     x-data
                     :class="$store.formState.is_state(item) ? 'bg-light-blue' : 'text-white border'"
                     class="h-8 w-8 flex items-center justify-center rounded-full text-center transition-colors"
                   >
                     <span class="pb-0.5 font-medium" x-text="index + 1"></span>
-                  </button>
+                  </div>
                 </li>
               </template>
             </ul>
@@ -248,10 +250,10 @@
                       <div
                         class="flex flex-col items-start ml-4 md:ml-0 md:mt-16"
                       >
-                        <h3
+                        <h2
                           class="text-marine-blue font-bold"
                           x-text="item.name"
-                        ></h3>
+                        ></h2>
                         <p
                           class="text-cool-gray text-sm"
                           x-text="$store.formState.format_price(item.price)"
@@ -276,9 +278,11 @@
                     >Monthly</span
                   >
                   <button
+                    aria-checked="true"
+                    aria-label="Mouthly and Yearly pricing switch"
                     type="button"
                     role="switch"
-                    @click="$store.formState.toggle()"
+                    @click="$store.formState.toggle(); $el.setAttribute('aria-checked',$store.formState.price_mouthly ? 'true' : 'false')"
                     class="peer inline-flex pl-0.5 h-5 w-10 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 bg-marine-blue"
                   >
                     <span
@@ -318,8 +322,10 @@
                       :class="$store.formState.has_addon(index) ? 'border-purplish-blue bg-purplish-blue bg-opacity-5 hover:bg-opacity-10' : 'border-cool-gray hover:bg-cool-gray hover:border-purplish-blue hover:bg-opacity-5'"
                     >
                       <button
+                        x-init="$el.setAttribute('aria-label',`Select Addon: ${addon.name}`)"
+                        aria-checked="false"
                         role="checkbox"
-                        @click="$store.formState.toggle_addon(index)"
+                        @click="$store.formState.toggle_addon(index); $el.setAttribute('aria-checked',$store.formState.has_addon(index) ? 'true':'false')"
                         :class="$store.formState.has_addon(index) ? 'bg-purplish-blue' : 'border border-cool-gray'"
                         class="h-5 w-5 rounded flex items-center justify-center"
                       >
@@ -339,10 +345,10 @@
                         </svg>
                       </button>
                       <div class="ml-4">
-                        <h3
+                        <h2
                           class="text-marine-blue font-medium"
                           x-text="addon.name"
-                        ></h3>
+                        ></h2>
                         <p
                           class="text-xs text-cool-gray"
                           x-text="addon.description"
@@ -376,11 +382,12 @@
                 <div class="bg-magnolia rounded-md mt-4 p-4 shrink-0 md:p-6">
                   <div class="flex justify-between items-center">
                     <div>
-                      <h3
+                      <h2
                         class="text-marine-blue font-bold text-sm md:text-lg"
                         x-text="$store.formState.get_selected_plan_name()"
-                      ></h3>
+                      ></h2>
                       <button
+                        aria-label="Change plan"
                         @click="$store.formState.goto(1)"
                         class="underline text-cool-gray text-sm md:text-base font-medium tracking-tighter hover:text-purplish-blue"
                       >
@@ -466,6 +473,7 @@
           >
             <div x-data x-show="$store.formState.page === 'info'"></div>
             <button
+              aria-label="To Previous Step"
               x-data
               x-cloak
               x-show="$store.formState.page !== 'info'"
@@ -485,6 +493,7 @@
             ></button>
             <!--This just submits the form on every click and is not handled by the button its self.-->
             <button
+              aria-label="Next Step"
               form="personal-info"
               x-show="$store.formState.page === 'info'"
               x-data
