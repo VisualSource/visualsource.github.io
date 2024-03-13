@@ -57,7 +57,7 @@ Alpine.store("formState", {
   display_name: ["YOUR INFO", "SELECT PLAN", "ADD-ONS", "SUMMARY"],
   pages: ["info", "plan", "add-ons", "summary", "thanks"],
   price_mouthly: true,
-  page: "thanks",
+  page: "info",
   page_idx: 0,
   plans: [{
     name: "Arcade",
