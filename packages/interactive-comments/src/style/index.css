@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply h-full flex flex-col bg-light-gray;
+  }
+  html {
+    font-family: "Rubik", sans-serif;
+    @apply bg-light-gray flex flex-col h-full;
+  }
+
+  comment-group {
+    display: block;
+  }
+
+  reply-element {
+    display: block;
+  }
+
+  comment-element {
+    display: block;
+  }
+
+  message-app {
+    display: block;
+  }
+}
+@layer components {
+  .attribution {
+    font-size: 11px;
+    text-align: center;
+  }
+  .attribution a {
+    color: hsl(228, 45%, 44%);
+  }
+
+  .grid-layout-reply-sm {
+    grid-template-areas:
+      "body body"
+      "body body"
+      "count action";
+  }
+
+  .grid-layout-reply-lg {
+    grid-template-areas:
+      "count body action"
+      "count body action"
+      "none  body none2";
+    grid-template-columns: 4rem 1fr 8rem;
+  }
+
+  .grid-layout-large {
+    grid-template-areas:
+      "count header action"
+      "count body   body  "
+      "count body   body  "
+      "none  body   body  ";
+    grid-template-columns: 0.5fr 4fr 1fr;
+  }
+
+  .grid-layout-sm {
+    grid-template-areas:
+      "header header header header"
+      "body body body body"
+      "body body body body"
+      "count count action action";
+  }
+
+  .grid-layout-header {
+    grid-area: header;
+  }
+
+  .grid-layout-body {
+    grid-area: body;
+  }
+
+  .grid-layout-count {
+    grid-area: count;
+  }
+  .grid-layout-action {
+    grid-area: action;
+  }
+}

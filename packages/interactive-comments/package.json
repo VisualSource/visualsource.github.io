@@ -1,0 +1,26 @@
+{
+  "name": "interactive-comments",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@lit/context": "^1.1.0",
+    "date-fns": "^3.4.0",
+    "immer": "^10.0.4",
+    "lit": "^3.1.2",
+    "superjson": "^2.2.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.6"
+  }
+}
