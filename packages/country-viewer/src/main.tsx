@@ -11,14 +11,14 @@ import Home from './pages/Home';
 const client = new QueryClient();
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path={import.meta.env.BASE_URL} element={<AppLayout />}>
+    <Route path="/" element={<AppLayout />}>
       <Route index element={<Home />} />
       <Route path="view/:id" element={<ViewCountry />} />
     </Route>
   )
 );
 
-const theme = localStorage.getItem("theme") ?? "system";
+const theme = localStorage.getItem("county-viewer-theme") ?? "system";
 
 switch (theme) {
   case "system":
@@ -36,7 +36,7 @@ switch (theme) {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
-      <RouterProvider router={router} />
+      <RouterProvider basename={import.meta.env.BASE_URL} router={router} />
     </QueryClientProvider>
   </React.StrictMode>,
 )
