@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import minifyLiterals from 'rollup-plugin-minify-html-literals-v3';
 
 const ID = "/interactive-comments";
 
@@ -10,5 +11,11 @@ export default defineConfig(({ command }) => {
             outDir: `../../dist${ID}`,
             emptyOutDir: true,
         },
+        plugins: [
+            {
+                ...minifyLiterals(),
+                apply: "build"
+            }
+        ]
     };
 });
