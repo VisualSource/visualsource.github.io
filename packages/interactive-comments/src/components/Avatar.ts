@@ -13,7 +13,7 @@ export class UserAvatar extends LitElement {
     protected render(): TemplateResult<1> {
         return html`
             <div class="relative flex ${this.size} shrink-0 overflow-hidden rounded-full">
-                <img class="aspect-square h-full w-full" src="${this.src}" alt="user avatar"/>
+                <img class="aspect-square h-full w-full" src="${import.meta.env.BASE_URL}${this.src}" alt="user avatar"/>
             </div>
         `;
     }
