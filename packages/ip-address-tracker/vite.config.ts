@@ -11,6 +11,7 @@ export default defineConfig(({ command }) => {
   return {
     base: command === "build" ? ID : "/",
     build: {
+      copyPublicDir: true,
       outDir: `../../dist${ID}`,
       emptyOutDir: true,
     },
