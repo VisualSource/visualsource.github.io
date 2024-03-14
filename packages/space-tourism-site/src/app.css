@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bellefair&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.grid-tech-lg {
+		grid-template-columns: 1.3fr 1fr;
+		grid-template-rows: 0.4fr 1fr;
+		grid-template-areas:
+			'header photo'
+			'bio    photo';
+	}
+
+	.grid-crew-md {
+		grid-template-rows: 100px 0.5fr 1fr;
+		grid-template-areas:
+			'header'
+			'bio'
+			'photo';
+	}
+	.grid-crew-lg {
+		grid-template-rows: 100px 1fr;
+		grid-template-columns: 1.5fr 1fr;
+		grid-template-areas:
+			'header photo'
+			'bio    photo'
+			'bio    photo';
+	}
+
+	.gird-header {
+		grid-area: header;
+	}
+
+	.grid-bio {
+		grid-area: bio;
+	}
+
+	.grid-photo {
+		grid-area: photo;
+	}
+
+	.tech-bg-mobile {
+		background-image: url('./lib/assets/technology/background-technology-mobile.jpg');
+	}
+
+	.tech-bg-tablet {
+		background-image: url('./lib/assets/technology/background-technology-tablet.jpg');
+	}
+
+	.tech-bg-desktop {
+		background-image: url('./lib/assets/technology/background-technology-desktop.jpg');
+	}
+
+	.crew-bg-mobile {
+		background-image: url('./lib/assets/crew/background-crew-mobile.jpg');
+	}
+
+	.crew-bg-tablet {
+		background-image: url('./lib/assets/crew/background-crew-tablet.jpg');
+	}
+
+	.crew-bg-desktop {
+		background-image: url('./lib/assets/crew/background-crew-desktop.jpg');
+	}
+
+	.destination-bg-mobile {
+		background-image: url('./lib/assets/destination/background-destination-mobile.jpg');
+	}
+
+	.destination-bg-tablet {
+		background-image: url('./lib/assets/destination/background-destination-tablet.jpg');
+	}
+
+	.destination-bg-desktop {
+		background-image: url('./lib/assets/destination/background-destination-desktop.jpg');
+	}
+
+	.home-bg-mobile {
+		background-image: url('./lib/assets/home/background-home-mobile.jpg');
+	}
+	.home-bg-table {
+		background-image: url('./lib/assets/home/background-home-mobile.jpg');
+	}
+	.home-bg-desktop {
+		background-image: url('./lib/assets/home/background-home-desktop.jpg');
+	}
+}
