@@ -1,12 +1,13 @@
 <script lang="ts">
+    import { base } from "$app/paths";
     import {page} from '$app/stores';
     let show = false;
 
     const content = [
-        { path: "/", name: "home" },
-        {name: "destination", path: "/destination" },
-        { path: "/crew", name: "crew", },
-        { path: "/technology", name: "technology"}
+        { path: `${base}`, name: "home" },
+        { path: `${base}/destination`, name: "destination", },
+        { path: `${base}/crew`, name: "crew", },
+        { path: `${base}/technology`, name: "technology"}
     ];
 
     let currentRoute = $page.url.pathname;
@@ -37,18 +38,11 @@
                     </button>
                 </div>
                 <ul class="px-8 space-y-8">
-                    <li>
-                        <a tabindex="0" class="text-nav group" href="/"><span class="font-bold mr-2">00</span> <span class="group-hover:text-white/80">HOME</span></a>
-                    </li>
-                    <li>
-                        <a tabindex="0"  class="text-nav group" href="/destination"><span class="font-bold mr-2">01</span><span class="group-hover:text-white/80">DESTINATION</span></a>
-                    </li>
-                    <li>
-                        <a tabindex="0"  class="text-nav group" href="/crew"><span class="font-bold mr-2">02</span><span class="group-hover:text-white/80">CREW</span></a>
-                    </li>
-                    <li>
-                        <a tabindex="0"  class="text-nav group" href="/technology"><span class="font-bold mr-2">03</span><span class="group-hover:text-white/80">TECHOLOGY</span></a>
-                    </li>
+                    {#each content as { name, path },i}
+                        <li>
+                            <a tabindex="0" class="text-nav group" href={path}><span class="font-bold mr-2">0{i}</span> <span class="group-hover:text-white/80 uppercase">{name}</span></a>
+                        </li>
+                    {/each}
                 </ul>
             </div>
         </div>

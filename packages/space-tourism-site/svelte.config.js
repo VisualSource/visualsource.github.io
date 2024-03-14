@@ -21,7 +21,7 @@ const config = {
 		adapter: adapter({
 			pages: '../../dist/space-tourism-site',
 			assets: '../../dist/space-tourism-site',
-			fallback: '404.html',
+			fallback: undefined,
 			precompress: false,
 			strict: true
 		})
