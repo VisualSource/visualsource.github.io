@@ -138,9 +138,6 @@ importers:
 
   packages/ip-address-tracker:
     dependencies:
-      '@vue-leaflet/vue-leaflet':
-        specifier: ^0.10.1
-        version: 0.10.1(leaflet@1.9.4)(typescript@5.4.2)
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -2140,21 +2137,6 @@ packages:
       '@volar/language-core': 2.1.2
       path-browserify: 1.0.1
     dev: true
-
-  /@vue-leaflet/vue-leaflet@0.10.1(leaflet@1.9.4)(typescript@5.4.2):
-    resolution: {integrity: sha512-RNEDk8TbnwrJl8ujdbKgZRFygLCxd0aBcWLQ05q/pGv4+d0jamE3KXQgQBqGAteE1mbQsk3xoNcqqUgaIGfWVg==}
-    peerDependencies:
-      '@types/leaflet': ^1.5.7
-      leaflet: ^1.6.0
-    peerDependenciesMeta:
-      '@types/leaflet':
-        optional: true
-    dependencies:
-      leaflet: 1.9.4
-      vue: 3.4.21(typescript@5.4.2)
-    transitivePeerDependencies:
-      - typescript
-    dev: false
 
   /@vue/babel-helper-vue-transform-on@1.2.1:
     resolution: {integrity: sha512-jtEXim+pfyHWwvheYwUwSXm43KwQo8nhOBDyjrUITV6X2tB7lJm6n/+4sqR8137UVZZul5hBzWHdZ2uStYpyRQ==}

@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-module Lelflet {
+module Leaflet {
     type LatLng = { lat: number; lng: number } | [number, number]
     type MapOptions = Partial<{
         center: [number, number],
@@ -27,16 +27,16 @@ module Lelflet {
 
 // eslint-disable-next-line no-var
 declare var L: {
-    map: (el: string | HTMLElement, ...options: unknown[]) => Lelflet.Map;
-    map: (el: string | HTMLLIElement, options: Record<string, unknown>) => Lelflet.Map;
+    map: (el: string | HTMLElement, ...options: unknown[]) => Leaflet.Map;
+    map: (el: string | HTMLLIElement, options: Record<string, unknown>) => Leaflet.Map;
     marker: (value: [number, number], options?: {
-        icon?: Lelflet.Icon,
+        icon?: Leaflet.Icon,
         title?: string,
         alt?: string,
-    }) => Lelflet.Marker,
+    }) => Leaflet.Marker,
     tileLayer: (layer: string, options?: {
         attribution?: string;
-    }) => Lelflet.Layer;
+    }) => Leaflet.Layer;
     icon(options: {
         iconUrl: string,
         shadowUrl?: string,
@@ -46,5 +46,5 @@ declare var L: {
         iconAnchor?: [number, number], // point of the icon which will correspond to marker's location
         shadowAnchor?: [number, number], // the same for the shadow
         popupAnchor?: [number, number]
-    }): Lelflet.Icon
+    }): Leaflet.Icon
 }

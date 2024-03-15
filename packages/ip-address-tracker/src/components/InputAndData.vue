@@ -9,6 +9,7 @@ const tests = {
 
 const query = ref<string>()
 const error = ref<string>()
+const loadError = ref<string>()
 const loading = ref<boolean>(false)
 const key = 'at_bhIktYH8JcZfaFE5m1ZdxUIVHWKTA'
 const emit = defineEmits({
@@ -17,37 +18,18 @@ const emit = defineEmits({
   }
 })
 
-let data = ref({
-  ip: '162.246.112.52',
-  location: {
-    country: 'US',
-    region: 'Indiana',
-    city: 'New Paris',
-    lat: 41.50033,
-    lng: -85.82805,
-    postalCode: '46553',
-    timezone: '-04:00',
-    geonameId: 4924135
-  },
-  as: {
-    asn: 11597,
-    name: 'MW-KANSAS',
-    route: '162.246.112.0/24',
-    domain: 'https://mercurybroadband.com/',
-    type: 'Cable/DSL/ISP'
-  },
-  isp: 'Mercury Broadband'
-})
+let data = ref()
 
 onMounted(async () => {
   try {
+    loading.value = true
     const self = localStorage.getItem('ip-address-tracker-self')
-
     if (self) {
       const payload = JSON.parse(self) as { expire: string; data: ApiResponse }
 
       if (new Date(payload.expire) > new Date()) {
         data.value = payload.data
+        emit('mapUpdate', { lat: payload.data.location.lat, lng: payload.data.location.lng })
         return
       }
     }
@@ -65,8 +47,13 @@ onMounted(async () => {
         data: result
       })
     )
+
+    emit('mapUpdate', { lat: result.location.lat, lng: result.location.lng })
   } catch (error) {
     console.log(error)
+    loadError.value = 'Failed to load details'
+  } finally {
+    loading.value = false
   }
 })
 
@@ -91,6 +78,7 @@ function validate(ev: Event) {
 
 async function onSubmit() {
   try {
+    loadError.value = ''
     loading.value = true
     // test if domain or ip
     if (!query.value) throw new Error('No Query value')
@@ -113,6 +101,7 @@ async function onSubmit() {
     emit('mapUpdate', { lat: payload.location.lat, lng: payload.location.lng })
   } catch (error) {
     console.error(error)
+    loadError.value = 'Failed to load details'
   } finally {
     loading.value = false
   }
@@ -133,13 +122,13 @@ async function onSubmit() {
             name="query"
             v-model.trim="query"
             placeholder="Search for any ip address or domian"
-            class="border-dark-gray placeholder:text-dark-gray focus-visible:ring-very-dark-gray flex h-14 w-full rounded-s-xl border bg-white px-6 py-4 text-lg ring-offset-2 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:h-14"
+            class="flex h-14 w-full rounded-s-xl border border-dark-gray bg-white px-6 py-4 text-lg ring-offset-2 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-sm placeholder:text-dark-gray focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-very-dark-gray focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:h-14"
             type="text"
           />
           <button
             aria-label="Submit query"
             type="submit"
-            class="bg-very-dark-gray hover:bg-dark-gray flex w-16 items-center justify-center rounded-e-xl transition-colors"
+            class="flex w-16 items-center justify-center rounded-e-xl bg-very-dark-gray transition-colors hover:bg-dark-gray"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14">
               <path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6" />
@@ -149,19 +138,21 @@ async function onSubmit() {
         <p role="alert" class="hidden text-red-500 peer-invalid:block">{{ error }}</p>
       </form>
 
-      <div class="hidden">
-        <!--Spacer-->
-      </div>
-
       <div class="flex w-full flex-col items-center justify-center md:px-6">
         <div
-          v-if="loading"
+          v-if="!loading && loadError"
+          class="flex h-full w-full flex-col items-center justify-center rounded-xl bg-white py-6 text-center shadow-xl md:py-8 md:pl-4 lg:py-12"
+        >
+          <h1 class="text-4xl font-medium uppercase animate-in fade-in-15">{{ loadError }}</h1>
+        </div>
+        <div
+          v-if="loading || !data"
           class="flex h-full w-full flex-col items-center justify-center rounded-xl bg-white py-6 text-center shadow-xl md:py-8 md:pl-4 lg:py-12"
         >
           <h1 class="text-4xl font-medium uppercase animate-in fade-in-15">Loading Details...</h1>
         </div>
         <ul
-          v-if="!loading"
+          v-if="!loading && data && !loadError"
           class="flex h-full w-full flex-col items-center justify-center space-y-2 rounded-xl bg-white py-6 text-center shadow-xl *:animate-in *:fade-in-20 md:flex-row md:items-start md:justify-between md:divide-x md:py-8 md:pl-4 md:pr-32 md:text-left md:*:px-4 lg:py-12"
         >
           <li>

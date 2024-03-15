@@ -9,21 +9,8 @@ const props = defineProps({
 
 const el = ref()
 
-let map: Lelflet.Map | undefined
-let marker: Lelflet.Marker | undefined
-
-function getLocation() {
-  return new Promise<GeolocationCoordinates>((resolve, reject) => {
-    if (!('geolocation' in navigator)) {
-      reject(new Error('geo location is not available'))
-      return
-    }
-    navigator.geolocation.getCurrentPosition(
-      (position) => resolve(position.coords),
-      (err) => reject(err)
-    )
-  })
-}
+let map: Leaflet.Map | undefined
+let marker: Leaflet.Marker | undefined
 
 onUpdated(() => {
   if (map && marker) {
@@ -33,10 +20,11 @@ onUpdated(() => {
 })
 
 onMounted(async () => {
-  const center = await getLocation()
+  let latitude = props.latitude ?? 0
+  let longitude = props.longitude ?? 0
 
   map = L.map(el.value, {
-    center: [props.latitude ?? center.latitude, props.longitude ?? center.longitude],
+    center: [latitude, longitude],
     zoom: 15,
     zoomControl: false
   })
@@ -46,7 +34,7 @@ onMounted(async () => {
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map)
 
-  marker = L.marker([center.latitude, center.longitude], {
+  marker = L.marker([latitude, latitude], {
     icon: L.icon({
       iconUrl: `${import.meta.env.BASE_URL}icon-location.svg`,
       iconSize: [46, 56],
