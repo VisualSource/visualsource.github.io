@@ -138,6 +138,7 @@ async function onSubmit() {
         <p role="alert" class="hidden text-red-500 peer-invalid:block">{{ error }}</p>
       </form>
 
+      <div class="hidden md:block"></div>
       <div class="flex w-full flex-col items-center justify-center md:px-6">
         <div
           v-if="!loading && loadError"
