@@ -4,12 +4,16 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply h-full flex flex-col bg-light-gray;
+  body,
+  html {
+    @apply h-full;
   }
   html {
     font-family: "Rubik", sans-serif;
-    @apply bg-light-gray flex flex-col h-full;
+    @apply bg-light-gray;
+  }
+  body {
+    @apply flex flex-col;
   }
 
   comment-group {

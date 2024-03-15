@@ -56,7 +56,7 @@ Users should be able to:
 
 ### What I learned
 
-- When working with lit custom html elements you can use a . in front of a prop to pass the value directly to the custom element this helps with passing objects and arrays between elements. This only working when calling it from the `html` templete function from lit.
+- When working with lit custom html elements you can use a '.' in front of a prop to pass the value directly to the custom element this helps with passing objects and arrays between elements. This only working when calling it from the `html` templete function from lit.
 
 ```ts
 class Element extends LitElement {

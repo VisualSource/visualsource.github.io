@@ -134,7 +134,7 @@ export class App extends LitElement {
             const { detail } = (ev as CustomEvent<CommentDeletePayload>);
 
             this.state = produce(this.state, draft => {
-                if (!detail.parent && detail.parent !== 0) {
+                if (detail.parent) {
                     const parent = draft.comments.findIndex(e => e.id === detail.parent);
                     if (parent === -1) throw new Error("Failed to find parent!");
 
@@ -170,7 +170,7 @@ export class App extends LitElement {
         `;
     }
 
-    protected createRenderRoot() {
+    protected createRenderRoot(): this {
         return this;
     }
 }

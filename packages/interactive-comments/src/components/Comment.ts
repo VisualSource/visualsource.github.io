@@ -1,9 +1,8 @@
 import { customElement, property, state } from 'lit/decorators.js';
 import { LitElement, type TemplateResult, html } from 'lit';
+import { formatRelative } from "date-fns/formatRelative";
 import { when } from 'lit/directives/when.js';
 import { consume } from "@lit/context";
-
-import { formatRelative } from "date-fns/formatRelative";
 
 import { EVENT_REPLY_DONE, canDelete, emitEvent } from '../lib/event';
 import { type State, context } from '../lib/state';
@@ -14,7 +13,7 @@ export class CommentElement extends LitElement {
 
     @consume({ context, subscribe: true })
     @property({ attribute: false })
-    public state?: State
+    public state?: State;
 
     @property({ type: Number })
     public commentId?: number;
@@ -50,25 +49,25 @@ export class CommentElement extends LitElement {
     protected reply: boolean = false;
 
     @state()
-    private editContent = "";
+    private editContent: string = "";
 
-    private voteUp() {
+    private voteUp(): void {
         if (!this.state || !this.commentId) return;
 
         emitEvent("like::inc", { id: this.commentId, parent: this.parentId }, this);
     }
 
-    private voteDown() {
+    private voteDown(): void {
         if (!this.state || !this.commentId) return;
 
         emitEvent("like::dec", { id: this.commentId, parent: this.parentId }, this);
     }
 
-    private toggleEdit() {
+    private toggleEdit(): void {
         this.edit = !this.edit;
     }
 
-    private toggleReply() {
+    private toggleReply(): void {
         this.reply = !this.reply;
     }
 
@@ -97,7 +96,7 @@ export class CommentElement extends LitElement {
         );
     }
 
-    private deleteSelf() {
+    private deleteSelf(): void {
         canDelete().then((event) => {
             if (event === "cancel") return;
             if (!this.commentId) throw new Error("Comment has no id");
@@ -105,7 +104,7 @@ export class CommentElement extends LitElement {
         });
     }
 
-    private onInput(ev: InputEvent) {
+    private onInput(ev: InputEvent): void {
         this.editContent = (ev.target as HTMLTextAreaElement).value;
     }
 
@@ -117,7 +116,7 @@ export class CommentElement extends LitElement {
         return this.parentId;
     }
 
-    private submit(ev: SubmitEvent) {
+    private submit(ev: SubmitEvent): void {
         ev.preventDefault();
 
         if (!this.commentId) throw new Error("No Comment id");
@@ -179,10 +178,8 @@ export class CommentElement extends LitElement {
     }
 
     protected render(): TemplateResult<1> {
-        return html/*html*/`
-            <div>
+        return html`
                 <div class="bg-white p-4 rounded-md shadow-sm grid grid-layout-sm space-y-2 md:grid-layout-large md:space-y-0 md:p-6">
-
                     <div class="flex items-center gap-3 grid-layout-header md:mb-4">
                         <user-avatar size="h-8 w-8" src=${this.avatar}></user-avatar>
                         <h4 class="text-dark-blue font-bold inline-flex items-center">
@@ -220,19 +217,16 @@ export class CommentElement extends LitElement {
                 `)}
 
                 ${when(!!this.replies?.length, () => html`
-                   <div class="pt-4">
-                        <comment-group 
-                            parentId=${this.commentId} 
-                            indent="true" 
-                            .comments=${this.replies}>
-                        </comment-group>
-                   </div>
+                    <comment-group class="pt-4"
+                        .parentId=${this.commentId} 
+                        indent
+                        .comments=${this.replies}>
+                    </comment-group>
                 `)}
-            </div>
         `;
     }
 
-    protected createRenderRoot() {
+    protected createRenderRoot(): this {
         return this;
     }
 }

@@ -36,7 +36,7 @@ export class DeleteDialog extends LitElement {
         `;
     }
 
-    protected createRenderRoot() {
+    protected createRenderRoot(): this {
         return this;
     }
 }

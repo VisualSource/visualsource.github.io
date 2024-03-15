@@ -11,7 +11,7 @@ export class ReplyElement extends LitElement {
 
     @consume({ context })
     @property({ attribute: false })
-    public state?: State
+    public state?: State;
 
     @property({ type: String })
     public label: string = "Send";
@@ -26,13 +26,13 @@ export class ReplyElement extends LitElement {
     public replyingTo?: string;
 
     @state()
-    private content = "";
+    private content: string = "";
 
-    private onInput(ev: InputEvent) {
+    private onInput(ev: InputEvent): void {
         this.content = (ev.target as HTMLTextAreaElement).value;
     }
 
-    private onSubmit(ev: SubmitEvent) {
+    private onSubmit(ev: SubmitEvent): void {
         ev.preventDefault();
 
         emitEvent("comment::create", {
@@ -53,7 +53,7 @@ export class ReplyElement extends LitElement {
                     <textarea name="comment" @input=${this.onInput} rows="3" class="w-full px-4 py-2 border border-light-gray rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-grayish-blue focus-visible:ring-offset-0 resize-none" placeholder="Add a comment..."></textarea>
                 </div>
 
-                <user-avatar class="grid-layout-count" size="h-8 w-8 md:h-10 md:w-10" src=${this.state?.user.image.webp}></user-avatar>
+                <user-avatar class="grid-layout-count" size="h-8 w-8 md:h-10 md:w-10" src=${this.state?.user.image.webp ?? ""}></user-avatar>
                 <div class="grid-layout-action flex justify-end">
                     <button aria-label="Post comment" type="submit" class="inline-flex items-center justify-center whitespace-nowrap font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-moderate-blue text-white hover:bg-moderate-blue/70 h-11 rounded-lg px-8 uppercase">${this.label}</button>
                 </div>
@@ -61,7 +61,7 @@ export class ReplyElement extends LitElement {
         `;
     }
 
-    protected createRenderRoot() {
+    protected createRenderRoot(): this {
         return this;
     }
 }

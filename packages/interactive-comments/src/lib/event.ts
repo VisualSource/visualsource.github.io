@@ -6,8 +6,9 @@ export const EVENT_REPLY_DONE = "reply::done";
 export const COMMENT_CREATE = "comment::create";
 export const COMMENT_DELETE = "comment::delete";
 export const COMMENT_PATCH = "comment::patch";
-export const LIKE_POST = "like::inc";
 export const DISLIKE_POST = "like::dec";
+export const LIKE_POST = "like::inc";
+
 
 type EventMap = {
     [COMMENT_CREATE]: CommentCreatePayload,

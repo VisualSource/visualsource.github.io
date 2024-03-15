@@ -20,11 +20,11 @@ export class CommentGroup extends LitElement {
                 ${this.comments.map((comment) => {
             return html`
                 <comment-element 
-                    parentId=${this.parentId} 
+                    .parentId=${this.parentId} 
                     commentId=${comment.id} 
                     createdAt=${comment.createdAt}
-                    replyingTo=${comment.replyingTo} 
-                    .replies=${comment.replies} 
+                    .replyingTo=${comment.replyingTo} 
+                    .replies=${comment.replies as Comment[]} 
                     avatar=${comment.user.image.webp} 
                     count=${comment.score} 
                     content=${comment.content} 
@@ -35,7 +35,7 @@ export class CommentGroup extends LitElement {
         `;
     }
 
-    protected createRenderRoot() {
+    protected createRenderRoot(): this {
         return this;
     }
 }
