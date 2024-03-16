@@ -36,12 +36,20 @@ type FormState = {
 
 type FormHandler = {
   submit: (ev: SubmitEvent) => void,
-  validate: (target: string, rules: string[], field: string) => void,
-  fields: {
-    email: string,
-    phone: string,
-    name: string
-  },
+  validate: (target: HTMLInputElement) => void,
+  fields: Record<string, string>
+}
+
+function once(callback: (value: boolean) => void, fallback: (value: boolean) => void) {
+  let called = false;
+  return function (this: unknown, ...args: [boolean]) {
+    if (!called) {
+      called = true;
+      callback.apply(this, args);
+    } else {
+      fallback.apply(this, args);
+    }
+  }
 }
 
 const iodine = new Iodine();
@@ -169,32 +177,83 @@ Alpine.store("formState", {
   },
 } as FormState);
 
+Alpine.directive("page", (el, { expression, modifiers }, { effect }) => {
+  const state = Alpine.store("formState") as FormState;
+
+  if (!el._x_doHide) el._x_doHide = () => {
+    Alpine.mutateDom(() => {
+      el.style.setProperty("display", "none", modifiers.includes('important') ? 'important' : undefined);
+    });
+  }
+
+  if (!el._x_doShow) el._x_doShow = () => {
+    Alpine.mutateDom(() => {
+      if (el.style.length === 1 && el.style.display === "none") {
+        el.removeAttribute("style");
+      } else {
+        el.style.removeProperty("display");
+      }
+    });
+  }
+
+  let hide = () => {
+    el._x_doHide?.call(this);
+    el._x_isShown = false;
+  }
+
+  let show = () => {
+    el._x_doShow?.call(this);
+    el._x_isShown = true;
+  }
+
+  let clickAwayCompatibleShow = () => setTimeout(show);
+  let firstTime = true;
+
+  const toggle = once(value => value ? show() : hide(), value => {
+    if (typeof el._x_toggleAndCascadeWithTransitions === "function") {
+      el._x_toggleAndCascadeWithTransitions(el, value, show, hide);
+    } else {
+      value ? clickAwayCompatibleShow() : hide();
+    }
+  });
+
+  let oldValue: boolean | undefined;
+
+  effect(() => {
+    const value = state.page === expression;
+    if (!firstTime && value === oldValue) return;
+
+    if (modifiers.includes('immediate')) value ? clickAwayCompatibleShow() : hide()
+
+    toggle(value);
+
+    oldValue = value;
+
+    firstTime = false;
+  });
+
+});
+
 Alpine.data("formdata", function () {
   return {
-    fields: {
-      email: "",
-      phone: "",
-      name: ""
-    },
-    validate(target: string, rules: string[], field: string) {
-      const el = document.querySelector<HTMLInputElement>(target);
-      if (!el) return;
-      const { error, valid } = iodine.assert(el?.value, rules);
+    fields: {},
+    validate(target: HTMLInputElement) {
+      const rules = JSON.parse(target.getAttribute("rules") ?? "[]");
+      const name = target.getAttribute("name");
+      if (!target || !name) return;
+      const { error, valid } = iodine.assert(target?.value, rules);
 
       if (!valid) {
-        this.fields[field as keyof FormHandler["fields"]] = error;
-        el?.setCustomValidity(error);
+        target?.setCustomValidity(error);
       } else {
-        el?.setCustomValidity("");
+        target?.setCustomValidity("");
       }
 
-      el?.reportValidity();
+      this.fields[name] = target.validationMessage;
+
+      target?.reportValidity();
     },
     submit(ev) {
-      this.validate("#form-address", ["required", "email"], "email");
-      this.validate("#form-name", ["required", "minLength:3"], "name");
-      this.validate("#form-phone", ["required", "phone"], "phone");
-
       if ((ev.target as HTMLFormElement).checkValidity()) {
         (Alpine.store("formState") as FormState).next();
       }
@@ -205,13 +264,3 @@ Alpine.data("formdata", function () {
 });
 
 Alpine.start();
-
-/*
-  <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
-      >. Coded by <a href="#">Collin Blosser</a>.
-    </div>
-
-*/

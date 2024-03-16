@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,54 +15,45 @@
     <title>Frontend Mentor | Multi-step form</title>
 
     <link rel="stylesheet" href="./src/style.css" />
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style>
   </head>
   <body class="h-screen bg-magnolia">
-    <div class="lg:px-52 lg:py-28 flex h-full">
+    <div
+      class="flex h-full md:flex-col md:items-center md:justify-center md:py-32"
+    >
       <div
-        class="bg-white h-full w-full rounded-xl shadow flex flex-col relative md:flex-row md:px-4 md:py-4"
+        class="container relative flex h-full w-full max-w-5xl flex-col rounded-xl bg-white shadow md:flex-row md:px-4 md:py-4 xl:max-w-6xl"
       >
         <nav
-          class="flex h-1/4 w-full justify-center flex-shrink-0 md:flex-col md:h-full md:w-4/12 lg:w-3/12"
+          class="relative flex h-1/4 w-full justify-center md:h-full md:w-3/12 md:flex-col"
         >
           <img
-            class="md:hidden w-full h-full object-cover"
+            class="h-full w-full object-cover md:hidden"
             src="./src/assets/images/bg-sidebar-mobile.svg"
             alt="background module"
           />
+
           <img
-            class="hidden md:block h-full w-full object-cover rounded-xl"
+            class="hidden h-full w-full rounded-xl object-cover md:block"
             src="./src/assets/images/bg-sidebar-desktop.svg"
             alt="background desktop"
           />
 
-          <ul
-            class="gap-4 mt-4 absolute hidden md:block top-0 left-0 px-8 md:px-12 space-y-6"
-          >
+          <ul class="absolute left-0 top-0 hidden space-y-4 pl-8 pt-4 md:block">
             <template x-data x-for="(item,index) in $store.formState.navigate">
-              <li class="flex gap-4 items-center">
+              <li class="flex items-center gap-4">
                 <div
                   x-data
                   :class="$store.formState.is_state(item) ? 'bg-light-blue' : 'text-white border'"
-                  class="h-8 w-8 flex items-center justify-center rounded-full text-center transition-colors"
+                  class="flex h-8 w-8 items-center justify-center rounded-full text-center transition-colors"
                 >
                   <span class="pb-0.5 font-medium" x-text="index + 1"></span>
                 </div>
                 <div>
-                  <span class="text-xs text-cool-gray font-bold"
+                  <span class="text-xs font-bold text-cool-gray"
                     >STEP <span x-text="index + 1"></span
                   ></span>
                   <h1
-                    class="text-light-gray font-bold text-sm -mt-1"
+                    class="-mt-1 text-sm font-bold text-light-gray"
                     x-text="$store.formState.display_name[index]"
                   ></h1>
                 </div>
@@ -71,12 +62,12 @@
           </ul>
         </nav>
         <main
-          class="flex-1 flex flex-col justify-end md:justify-between md:px-14 xl:px-32"
+          class="flex flex-1 flex-col justify-end md:justify-between md:px-32"
         >
           <div
-            class="absolute top-0 flex flex-col gap-11 items-center w-full md:h-full md:relative"
+            class="absolute top-0 flex w-full flex-col items-center gap-11 md:relative md:h-full"
           >
-            <ul class="gap-4 mt-8 flex justify-center md:hidden">
+            <ul class="mt-8 flex justify-center gap-4 md:hidden">
               <template
                 x-data
                 x-for="(item,index) in $store.formState.navigate"
@@ -85,7 +76,7 @@
                   <div
                     x-data
                     :class="$store.formState.is_state(item) ? 'bg-light-blue' : 'text-white border'"
-                    class="h-8 w-8 flex items-center justify-center rounded-full text-center transition-colors"
+                    class="flex h-8 w-8 items-center justify-center rounded-full text-center transition-colors"
                   >
                     <span class="pb-0.5 font-medium" x-text="index + 1"></span>
                   </div>
@@ -94,15 +85,14 @@
             </ul>
 
             <div
-              class="bg-white rounded-xl shadow md:shadow-none flex flex-col px-6 pt-8 pb-8 mx-4 md:pb-0 md:px-0 md:mx-0 md:w-full md:h-full"
+              class="mx-4 flex flex-col rounded-xl bg-white px-6 pb-8 pt-8 shadow md:mx-0 md:h-full md:w-full md:px-0 md:pb-0 md:shadow-none"
             >
               <!--Step data-->
               <form
-                novalidate
                 id="personal-info"
                 x-data="formdata"
-                x-show="$store.formState.page === 'info'"
-                class="h-fit flex flex-col"
+                x-page="info"
+                class="flex h-fit flex-col"
                 @submit.prevent="submit"
               >
                 <h1
@@ -110,92 +100,100 @@
                 >
                   Personal info
                 </h1>
-                <p class="text-cool-gray text-balance mt-2 text-base">
+                <p class="mt-2 text-balance text-base text-cool-gray">
                   Please provide your name, email address, and phone number.
                 </p>
                 <!--
                   https://stackoverflow.com/questions/47307199/css-highlight-label-before-an-invalid-input
                 -->
                 <fieldset class="group">
-                  <label class="flex justify-between w-full py-1 mt-4">
+                  <label class="mt-4 flex w-full justify-between py-1">
                     <span
-                      class="text-marine-blue text-sm tracking-tight font-medium"
+                      class="text-sm font-medium tracking-tight text-marine-blue"
                       >Name</span
                     ><span
-                      x-text="fields.name"
-                      class="invisible group-invalid:visible text-strawberry-red text-sm"
+                      x-text="fields?.name"
+                      class="invisible text-sm text-strawberry-red group-invalid:visible"
                     ></span>
                   </label>
                   <input
-                    class="rounded placeholder:text-cool-gray border-light-gray focus:border-cool-gray focus:ring-cool-gray invalid:border-strawberry-red w-full invalid:ring-strawberry-red focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
+                    class="w-full rounded border-light-gray placeholder:text-cool-gray invalid:border-strawberry-red invalid:ring-strawberry-red focus:border-cool-gray focus:ring-cool-gray focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
                     id="form-name"
                     type="text"
+                    name="name"
+                    minlength="3"
+                    rules='["required","minLength:3"]'
+                    @input="validate($el)"
+                    required
                     placeholder="e.g. Stephen King Email"
                   />
                 </fieldset>
 
                 <fieldset class="group">
-                  <label class="flex justify-between py-1 mt-2">
+                  <label class="mt-2 flex justify-between py-1">
                     <span
-                      class="block text-sm font-medium text-marine-blue tracking-tight"
+                      class="block text-sm font-medium tracking-tight text-marine-blue"
                       >Email Address</span
                     >
                     <span
-                      class="invisible group-invalid:visible text-strawberry-red text-sm"
-                      x-text="fields.email"
+                      class="invisible text-sm text-strawberry-red group-invalid:visible"
+                      x-text="fields?.email"
                     ></span>
                   </label>
                   <input
-                    class="rounded placeholder:text-cool-gray border-light-gray invalid:border-strawberry-red w-full invalid:ring-strawberry-red focus:border-cool-gray focus:ring-cool-gray focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
+                    class="w-full rounded border-light-gray placeholder:text-cool-gray invalid:border-strawberry-red invalid:ring-strawberry-red focus:border-cool-gray focus:ring-cool-gray focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
                     id="form-address"
                     type="email"
+                    required
+                    name="email"
+                    @input="validate($el)"
+                    rules='["required","email"]'
                     placeholder="e.g. stephenking@lorem.com"
                   />
                 </fieldset>
 
                 <fieldset class="group">
-                  <label class="flex justify-between py-1 mt-2">
+                  <label class="mt-2 flex justify-between py-1">
                     <span
-                      class="block text-sm font-medium text-marine-blue tracking-tight"
+                      class="block text-sm font-medium tracking-tight text-marine-blue"
                       >Phone Number</span
                     >
                     <span
-                      class="invisible group-invalid:visible text-strawberry-red text-sm"
-                      x-text="fields.phone"
+                      class="invisible text-sm text-strawberry-red group-invalid:visible"
+                      x-text="fields?.phone"
                     ></span>
                   </label>
                   <input
-                    class="rounded placeholder:text-cool-gray border-light-gray invalid:border-strawberry-red invalid:ring-strawberry-red w-full focus:border-cool-gray focus:ring-cool-gray focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
+                    class="w-full rounded border-light-gray placeholder:text-cool-gray invalid:border-strawberry-red invalid:ring-strawberry-red focus:border-cool-gray focus:ring-cool-gray focus:invalid:border-strawberry-red focus:invalid:ring-strawberry-red"
                     id="form-phone"
                     type="tel"
+                    required
+                    name="phone"
+                    rules='["required","phone"]'
+                    @input="validate($el)"
                     placeholder="e.g. +1 234 567 890"
                   />
                 </fieldset>
               </form>
 
               <!-- Step 2 start -->
-              <div
-                class="flex flex-col"
-                x-cloak
-                x-data
-                x-show="$store.formState.page === 'plan'"
-              >
+              <div class="flex flex-col" x-cloak x-data x-page="plan">
                 <h1
                   class="text-2xl font-bold tracking-tight text-marine-blue md:text-4xl"
                 >
                   Select your plan
                 </h1>
-                <p class="text-cool-gray font-normal mt-2">
+                <p class="mt-2 font-normal text-cool-gray">
                   You have the option of monthly or yearly billing.
                 </p>
 
                 <div
-                  class="flex flex-col space-y-3 mt-5 md:flex-row md:space-y-0 md:space-x-3 w-full"
+                  class="mt-5 flex w-full flex-col space-y-3 md:flex-row md:space-x-3 md:space-y-0"
                   x-data
                 >
                   <template x-for="(item,index) in $store.formState.plans">
                     <button
-                      class="flex items-center border rounded-md px-3 py-4 transition-colors md:flex-col md:items-start md:w-full hover:bg-cool-gray hover:bg-opacity-5 hover:shadow-sm"
+                      class="flex items-center rounded-md border px-3 py-4 transition-colors hover:bg-cool-gray hover:bg-opacity-5 hover:shadow-sm md:w-full md:flex-col md:items-start"
                       :class="$store.formState.plan.selected === index ? 'border-purplish-blue bg-purplish-blue hover:bg-purplish-blue hover:bg-opacity-15 bg-opacity-5' : 'border-light-gray hover:border-purplish-blue'"
                       @click="$store.formState.set_selected(index)"
                     >
@@ -248,19 +246,19 @@
                         </g>
                       </svg>
                       <div
-                        class="flex flex-col items-start ml-4 md:ml-0 md:mt-16"
+                        class="ml-4 flex flex-col items-start md:ml-0 md:mt-16"
                       >
                         <h2
-                          class="text-marine-blue font-bold"
+                          class="font-bold text-marine-blue"
                           x-text="item.name"
                         ></h2>
                         <p
-                          class="text-cool-gray text-sm"
+                          class="text-sm text-cool-gray"
                           x-text="$store.formState.format_price(item.price)"
                         ></p>
                         <span
                           x-show="!$store.formState.price_mouthly"
-                          class="text-marine-blue text-sm font-medium"
+                          class="text-sm font-medium text-marine-blue"
                           >2 months free</span
                         >
                       </div>
@@ -270,7 +268,7 @@
 
                 <div
                   x-data
-                  class="bg-alabaster px-2 py-3 flex justify-center gap-6 items-center mt-6 md:mt-10"
+                  class="mt-6 flex items-center justify-center gap-6 bg-alabaster px-2 py-3 md:mt-10"
                 >
                   <span
                     :class="!$store.formState.price_mouthly ? 'text-cool-gray' : 'text-marine-blue'"
@@ -283,7 +281,7 @@
                     type="button"
                     role="switch"
                     @click="$store.formState.toggle(); $el.setAttribute('aria-checked',$store.formState.price_mouthly ? 'true' : 'false')"
-                    class="peer inline-flex pl-0.5 h-5 w-10 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 bg-marine-blue"
+                    class="focus-visible:ring-ring focus-visible:ring-offset-background peer inline-flex h-5 w-10 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent bg-marine-blue pl-0.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <span
                       :class="!$store.formState.price_mouthly ? 'translate-x-5':'translate-x-0'"
@@ -300,25 +298,20 @@
               <!-- Step 2 end -->
 
               <!-- Step 3 start -->
-              <div
-                class="h-fit flex flex-col"
-                x-data
-                x-cloak
-                x-show="$store.formState.page === 'add-ons'"
-              >
+              <div class="flex h-fit flex-col" x-data x-cloak x-page="add-ons">
                 <h1
                   class="text-2xl font-bold tracking-tight text-marine-blue md:text-4xl"
                 >
                   Pick add-ons
                 </h1>
-                <p class="text-cool-gray mt-2 text-base">
+                <p class="mt-2 text-base text-cool-gray">
                   Add-ons help enhance your gaming experience.
                 </p>
 
                 <div class="space-y-4">
                   <template x-for="(addon,index) in $store.formState.addons">
                     <div
-                      class="flex items-center border rounded-md py-2 px-3 md:py-5 hover:shadow-sm"
+                      class="flex items-center rounded-md border px-3 py-2 hover:shadow-sm md:py-5"
                       :class="$store.formState.has_addon(index) ? 'border-purplish-blue bg-purplish-blue bg-opacity-5 hover:bg-opacity-10' : 'border-cool-gray hover:bg-cool-gray hover:border-purplish-blue hover:bg-opacity-5'"
                     >
                       <button
@@ -327,7 +320,7 @@
                         role="checkbox"
                         @click="$store.formState.toggle_addon(index); $el.setAttribute('aria-checked',$store.formState.has_addon(index) ? 'true':'false')"
                         :class="$store.formState.has_addon(index) ? 'bg-purplish-blue' : 'border border-cool-gray'"
-                        class="h-5 w-5 rounded flex items-center justify-center"
+                        class="flex h-5 w-5 items-center justify-center rounded"
                       >
                         <svg
                           x-show="$store.formState.has_addon(index)"
@@ -346,7 +339,7 @@
                       </button>
                       <div class="ml-4">
                         <h2
-                          class="text-marine-blue font-medium"
+                          class="font-medium text-marine-blue"
                           x-text="addon.name"
                         ></h2>
                         <p
@@ -355,7 +348,7 @@
                         ></p>
                       </div>
                       <span
-                        class="text-sm ml-auto text-purplish-blue"
+                        class="ml-auto text-sm text-purplish-blue"
                         x-text="$store.formState.format_price(addon.price,true)"
                       ></span>
                     </div>
@@ -364,38 +357,33 @@
               </div>
               <!-- Step 3 end -->
               <!-- Step 4 start -->
-              <div
-                class="h-fit flex flex-col"
-                x-cloak
-                x-data
-                x-show="$store.formState.page === 'summary'"
-              >
+              <div class="flex h-fit flex-col" x-cloak x-data x-page="summary">
                 <h1
                   class="text-2xl font-bold tracking-tight text-marine-blue md:text-4xl"
                 >
                   Finishing up
                 </h1>
-                <p class="text-cool-gray mt-2 text-base">
+                <p class="mt-2 text-base text-cool-gray">
                   Double-check everything looks OK before confirming.
                 </p>
 
-                <div class="bg-magnolia rounded-md mt-4 p-4 shrink-0 md:p-6">
-                  <div class="flex justify-between items-center">
+                <div class="mt-4 shrink-0 rounded-md bg-magnolia p-4 md:p-6">
+                  <div class="flex items-center justify-between">
                     <div>
                       <h2
-                        class="text-marine-blue font-bold text-sm md:text-lg"
+                        class="text-sm font-bold text-marine-blue md:text-lg"
                         x-text="$store.formState.get_selected_plan_name()"
                       ></h2>
                       <button
                         aria-label="Change plan"
                         @click="$store.formState.goto(1)"
-                        class="underline text-cool-gray text-sm md:text-base font-medium tracking-tighter hover:text-purplish-blue"
+                        class="text-sm font-medium tracking-tighter text-cool-gray underline hover:text-purplish-blue md:text-base"
                       >
                         Change
                       </button>
                     </div>
                     <span
-                      class="text-marine-blue font-bold text-sm md:text-lg"
+                      class="text-sm font-bold text-marine-blue md:text-lg"
                       x-text="$store.formState.get_selected_plan_price()"
                     ></span>
                   </div>
@@ -405,7 +393,7 @@
                       <li class="flex justify-between text-sm md:text-base">
                         <span class="text-cool-gray" x-text="item.name"></span>
                         <span
-                          class="text-marine-blue font-medium text-opacity-75"
+                          class="font-medium text-marine-blue text-opacity-75"
                           x-text="$store.formState.format_price(item.price,true)"
                         ></span>
                       </li>
@@ -413,13 +401,13 @@
                   </ul>
                 </div>
 
-                <div class="flex items-center justify-between pt-4 px-4 mt-4">
+                <div class="mt-4 flex items-center justify-between px-4 pt-4">
                   <span
-                    class="text-cool-gray text-sm md:text-base font-medium tracking-tight"
+                    class="text-sm font-medium tracking-tight text-cool-gray md:text-base"
                     x-text="$store.formState.price_mouthly ? 'Total (pre month)' : 'Total (pre year)'"
                   ></span>
                   <span
-                    class="text-purplish-blue font-bold text-lg md:text-xl"
+                    class="text-lg font-bold text-purplish-blue md:text-xl"
                     x-text="$store.formState.get_total()"
                   ></span>
                 </div>
@@ -427,13 +415,13 @@
               <!-- Step 4 end -->
               <!-- Step 5 start -->
               <div
-                class="flex flex-col justify-center items-center gap-4 h-full"
+                class="flex h-full flex-col items-center justify-center gap-4"
                 x-data
                 x-cloak
-                x-show="$store.formState.page === 'thanks'"
+                x-page="thanks"
               >
                 <svg
-                  class="h-14 w-14 md:h-20 md:w-20 mt-12 md:mt-0"
+                  class="mt-12 h-14 w-14 md:mt-0 md:h-20 md:w-20"
                   xmlns="http://www.w3.org/2000/svg"
                   width="80"
                   height="80"
@@ -452,11 +440,11 @@
                   </g>
                 </svg>
                 <h1
-                  class="text-marine-blue text-2xl font-bold -mb-2 md:mt-2 md:text-3xl"
+                  class="-mb-2 text-2xl font-bold text-marine-blue md:mt-2 md:text-3xl"
                 >
                   Thank you!
                 </h1>
-                <p class="text-cool-gray text-center mb-12 md:mt-2">
+                <p class="mb-12 text-center text-cool-gray md:mt-2">
                   Thanks for confirming your subscription! We hope you have fun
                   using our platform. If you ever need support, please feel free
                   to email us at support@loremgaming.com.
@@ -469,16 +457,16 @@
           <div
             x-data
             x-show="$store.formState.page !== 'thanks'"
-            class="bg-white h-[70px] flex-shrink-0 flex justify-between items-center px-4 md:px-0"
+            class="flex h-[70px] flex-shrink-0 items-center justify-between bg-white px-4 md:px-0"
           >
-            <div x-data x-show="$store.formState.page === 'info'"></div>
+            <div x-data x-page="info"></div>
             <button
               aria-label="To Previous Step"
               x-data
               x-cloak
               x-show="$store.formState.page !== 'info'"
               @click="$store.formState.prev()"
-              class="text-cool-gray font-medium"
+              class="font-medium text-cool-gray"
             >
               Go Back
             </button>
@@ -489,15 +477,15 @@
               x-data
               x-text="$store.formState.page === 'summary' ? 'Confirm' : 'Next Step'"
               :class="$store.formState.page === 'summary' ? 'bg-purplish-blue':'bg-marine-blue' "
-              class="text-magnolia rounded-md font-bold px-4 py-2.5 md:px-6 md:py-3 text-sm hover:opacity-75"
+              class="rounded-md px-4 py-2.5 text-sm font-bold text-magnolia hover:opacity-75 md:px-6 md:py-3"
             ></button>
             <!--This just submits the form on every click and is not handled by the button its self.-->
             <button
               aria-label="Next Step"
               form="personal-info"
-              x-show="$store.formState.page === 'info'"
+              x-page="info"
               x-data
-              class="text-magnolia rounded-md font-bold px-4 py-2.5 md:px-6 md:py-3 text-sm hover:opacity-75 bg-marine-blue"
+              class="rounded-md bg-marine-blue px-4 py-2.5 text-sm font-bold text-magnolia hover:opacity-75 md:px-6 md:py-3"
             >
               Next Step
             </button>
