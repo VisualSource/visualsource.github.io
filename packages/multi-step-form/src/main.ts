@@ -254,6 +254,11 @@ Alpine.data("formdata", function () {
       target?.reportValidity();
     },
     submit(ev) {
+
+      for (const input of (ev.target as HTMLFormElement).querySelectorAll("input")) {
+        this.validate(input);
+      }
+
       if ((ev.target as HTMLFormElement).checkValidity()) {
         (Alpine.store("formState") as FormState).next();
       }

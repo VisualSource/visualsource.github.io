@@ -55,7 +55,7 @@ Users should be able to:
 
 ### What I learned
 
-One of the major things i learned was that you can use a fieldset element to catch the :valid and :invalid pseudo-classes which makes it easier to to style other element dependent on the input element state.
+One of the major things i learned was that you can use a fieldset element to catch the :valid and :invalid pseudo-classes which makes it easier to to style other elements dependent on the input element state.
 
 ```html
 <fieldset>
@@ -66,7 +66,7 @@ One of the major things i learned was that you can use a fieldset element to cat
 
 ```css
 fieldset:invalid > label:first-of-type {
-  border-color: red;
+  color: red;
 }
 ```
 
@@ -77,11 +77,11 @@ In the furture i'd to continue working on implementing form validation better as
 ### Useful resources
 
 - [fieldset](https://stackoverflow.com/a/71647978) - Using a fieldset to catch :invalid and :valid pseudo-classes
-- [:invalid](https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid) - How the :invalid pseudo-class works and interacts with form elements.
-- [setCustomValidity()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLObjectElement/setCustomValidity) - Setting custom valiation error messages
+- [MDN | :invalid](https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid) - How the :invalid pseudo-class works and interacts with form elements.
+- [MDN | setCustomValidity()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLObjectElement/setCustomValidity) - Setting custom valiation error messages
 
 ## Author
 
-- Website - [Collin Blosser](https://visualsource.us)
+- Website - [https://visualsource.us](https://visualsource.us)
 - Frontend Mentor - [@VisualSource](https://www.frontendmentor.io/profile/VisualSource)
 - LinkedIn - [Collin Blosser](https://linkedin.com/in/collinblosser)
