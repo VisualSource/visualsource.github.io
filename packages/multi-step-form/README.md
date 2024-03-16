@@ -53,8 +53,6 @@ Users should be able to:
 - [Tailwind css](https://tailwindcss.com/) - For styles
 - [Vite](https://vitejs.dev/) - Bundler
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
-
 ### What I learned
 
 One of the major things i learned was that you can use a fieldset element to catch the :valid and :invalid pseudo-classes which makes it easier to to style other element dependent on the input element state.
@@ -74,9 +72,7 @@ fieldset:invalid > label:first-of-type {
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+In the furture i'd to continue working on implementing form validation better as i dont think i have it down completely yet.
 
 ### Useful resources
 
