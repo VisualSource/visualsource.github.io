@@ -88,4 +88,4 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 - Website - [Collin Blosser](https://visualsource.us)
 - Frontend Mentor - [@VisualSource](https://www.frontendmentor.io/profile/VisualSource)
-- LinkedIn - [@collinblosser](https://linkedin.com/in/collinblosser)
+- LinkedIn - [Collin Blosser](https://linkedin.com/in/collinblosser)
