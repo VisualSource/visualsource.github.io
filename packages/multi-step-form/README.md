@@ -84,4 +84,4 @@ In the furture i'd to continue working on implementing form validation better as
 
 - Website - [Collin Blosser](https://visualsource.us)
 - Frontend Mentor - [@VisualSource](https://www.frontendmentor.io/profile/VisualSource)
-- LinkedIn - [@collinblosser](https://linkedin.com/in/collinblosser)
+- LinkedIn - [Collin Blosser](https://linkedin.com/in/collinblosser)
