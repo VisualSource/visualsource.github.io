@@ -68,7 +68,7 @@ class Element extends LitElement {
 }
 ```
 
-- When working with css grid areas, declaring the grid with columns and rows is not required, but can be add to help constan the element in the grid and with `fr` units it allows for responive design.
+- When working with css grid areas, declaring the grid templete column and row property is not required, but can be helpful constrain the areas in the grid. Along with `fr` units it allows for responive design.
 
 ```css
 .example-grid {
@@ -93,7 +93,7 @@ Date.parse("Some Invalid Date");
 
 ### Continued development
 
-In the future i'd like to use css grid area more, due to it allow for moving content around a container with out having to redeclare the some component in more then one place. I tend to fall in to using only flexbox but css gird is soming i'd like to use more.
+In the future i'd like to use css grid area more, due to it allow for moving content around a container with out having to redeclare the some components in more then one place. I tend to fall in to using only flexbox but css gird is soming i'd like to use more.
 
 ### Useful resources
 
