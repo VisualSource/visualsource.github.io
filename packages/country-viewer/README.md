@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/responsive-rest-countries-api-using-react-O6CDWQ0KLp](https://www.frontendmentor.io/solutions/responsive-rest-countries-api-using-react-O6CDWQ0KLp)
 - Live Site URL: [https://visualsource.github.io/county-viewer](https://visualsource.github.io/county-viewer)
 
 ## My process
