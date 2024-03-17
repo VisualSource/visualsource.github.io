@@ -31,7 +31,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/space-tourism-site-using-svelte-rFgOnvUjeP](https://www.frontendmentor.io/solutions/space-tourism-site-using-svelte-rFgOnvUjeP)
 - Live Site URL: [https://visualsource.github.io/space-tourism-site](https://visualsource.github.io/space-tourism-site)
 
 ## My process
