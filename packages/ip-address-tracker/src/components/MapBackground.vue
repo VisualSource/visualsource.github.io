@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, onUpdated } from 'vue'
 import 'leaflet'
+import { normalize } from '@/lib/utils'
 
 const props = defineProps({
   latitude: Number,
@@ -36,7 +37,7 @@ onMounted(async () => {
 
   marker = L.marker([latitude, latitude], {
     icon: L.icon({
-      iconUrl: `${import.meta.env.BASE_URL}icon-location.svg`,
+      iconUrl: normalize(`${import.meta.env.BASE_URL}/icon-location.svg`),
       iconSize: [46, 56],
       iconAnchor: [23, 56]
     })

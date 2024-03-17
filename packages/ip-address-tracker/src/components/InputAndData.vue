@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { getLocation, type ApiResponse } from '@/lib/getLocation'
 import { onMounted, ref } from 'vue'
+import { getLocation, type ApiResponse } from '@/lib/getLocation'
 
 const tests = {
   ipv4: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
@@ -109,7 +109,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <div class="absolute left-0 top-0 z-50 flex h-full w-full justify-center">
+  <div class="absolute left-0 top-0 z-50 flex w-full justify-center">
     <div
       class="container flex flex-col items-center space-y-6 p-6 md:space-y-8 md:py-8 xl:space-y-10"
     >
