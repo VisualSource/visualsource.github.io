@@ -1,12 +1,17 @@
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ReactDOM from 'react-dom/client';
-import React from 'react';
-import './index.css';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import "./index.css";
 
-import ViewCountry from './pages/ViewCountry';
-import AppLayout from './layouts/App';
-import Home from './pages/Home';
+import AppLayout from "./layouts/App";
+import Home from "./pages/Home";
+import ViewCountry from "./pages/ViewCountry";
 
 const client = new QueryClient();
 const router = createBrowserRouter(
@@ -14,8 +19,9 @@ const router = createBrowserRouter(
     <Route path="/" element={<AppLayout />}>
       <Route index element={<Home />} />
       <Route path="view/:id" element={<ViewCountry />} />
-    </Route>
-  ), { basename: import.meta.env.BASE_URL }
+    </Route>,
+  ),
+  { basename: import.meta.env.BASE_URL },
 );
 
 const theme = localStorage.getItem("county-viewer-theme") ?? "system";
@@ -27,7 +33,6 @@ darkmode.addEventListener("change", () => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-  console.log("HELLO", theme, darkmode);
   switch (theme) {
     case "system":
       if (darkmode.matches) {
@@ -42,10 +47,10 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
       <RouterProvider router={router} />
     </QueryClientProvider>
   </React.StrictMode>,
-)
+);

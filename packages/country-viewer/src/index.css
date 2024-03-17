@@ -65,7 +65,7 @@ input
 
 @layer components {
   .show-ring:has(> input:focus-visible) {
-    @apply ring-offset-background ring-2 ring-ring ring-offset-2;
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
   .outline-hidden {
     outline: none;
