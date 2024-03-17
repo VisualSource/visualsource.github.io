@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/responive-interactive-comments-using-lit-6QaZwWQ6A-](https://www.frontendmentor.io/solutions/responive-interactive-comments-using-lit-6QaZwWQ6A-)
 - Live Site URL: [https://visualsource.github.io/interactive-comments](https://visualsource.github.io/interactive-comments)
 
 ## My process
