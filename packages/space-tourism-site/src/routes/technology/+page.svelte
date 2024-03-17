@@ -15,19 +15,19 @@
     let active = 0;
 </script>
 
-<Container class="tech-bg-mobile md:tech-bg-tablet lg:tech-bg-desktop h-full">
+<Container class="tech-bg-mobile md:tech-bg-tablet lg:tech-bg-desktop h-full lg:overflow-hidden">
     <main class="space-y-8 h-full flex flex-col lg:grid grid-tech-lg lg:space-y-0">
         <div class="uppercase text-h-16 tracking-2.7 text-center md:text-h-20 md:tracking-3-38 md:text-left md:px-10 md:pt-10 md:pb-6 gird-header lg:px-20"> 
             <span class="opacity-25 -mr-0.5 font-bold">03</span> 
             Space Launch 101
         </div>
     
-        <div class="grid-photo lg:ml-auto lg:my-auto flex flex-col justify-center">
+        <div class="grid-photo lg:ml-auto my-auto flex flex-col justify-center">
             <img class="lg:hidden" src={landscape_images[active]} alt={data[active].name}/>
             <img class="hidden lg:block" src={portrait_images[active]} alt={data[active].name}/>
         </div>
 
-        <div class="flex flex-col h-full space-y-6 md:space-y-8 grid-bio lg:flex-row lg:pl-20 lg:pr-24 lg:space-y-0 lg:gap-10">
+        <div class="flex flex-col h-fit space-y-6 md:space-y-8 grid-bio lg:flex-row lg:pl-20 lg:pr-24 lg:space-y-0 lg:gap-10">
             <ul class="flex gap-3 justify-center md:gap-6 md:py-8 lg:flex-col lg:py-0 lg:justify-start">
                 {#each [0,1,2] as index}
                     <li class="h-10 w-10 md:h-16 md:w-16 lg:h-20 lg:w-20 flex rounded-full border : {active===index?"bg-white text-black":"border-white/15"} hover:border-white transition-colors">

@@ -7,7 +7,6 @@
 @layer components {
 	.grid-tech-lg {
 		grid-template-columns: 1.3fr 1fr;
-		grid-template-rows: 0.4fr 1fr;
 		grid-template-areas:
 			'header photo'
 			'bio    photo';

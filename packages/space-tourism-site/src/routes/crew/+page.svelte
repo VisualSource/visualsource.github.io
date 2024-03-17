@@ -31,7 +31,7 @@
         </div>
   
     
-        <div class="grid-bio flex flex-col items-center mt-4 gap-6 md:flex-col-reverse md:justify-start xl:items-start">
+        <div class="grid-bio flex flex-col items-center gap-6 md:flex-col-reverse md:justify-start xl:items-start">
             <ul class="flex gap-3 xl:pl-32  xl:mb-32 xl:mt-24 xl:gap-6">
                 {#each [0,1,2,3] as index}
                     <li class="h-3 w-3 xl:h-4 xl:w-4 flex {active === index ? "bg-white" : "bg-white/15"} hover:bg-white/50 rounded-full cursor-pointer transition-colors">
