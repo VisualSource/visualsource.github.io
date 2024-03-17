@@ -52,7 +52,9 @@ onUnmounted(() => {
 
 <template>
   <div class="flex h-full flex-col">
-    <div class="backdrop-mobile md:backdrop-desktop h-1/3 w-full bg-cover bg-no-repeat"></div>
+    <div
+      class="backdrop-mobile md:backdrop-desktop relative h-1/3 w-full bg-cover bg-no-repeat"
+    ></div>
     <div class="h-2/3 w-full">
       <div id="map" ref="el"></div>
     </div>

@@ -110,7 +110,9 @@ async function onSubmit() {
 
 <template>
   <div class="absolute left-0 top-0 z-50 flex h-full w-full justify-center">
-    <div class="container flex flex-col items-center space-y-6 p-6 md:space-y-8 md:py-8">
+    <div
+      class="container flex flex-col items-center space-y-6 p-6 md:space-y-8 md:py-8 xl:space-y-10"
+    >
       <h1 class="font-b text-3xl font-medium text-white">IP Address Tracker</h1>
 
       <form @submit.prevent="onSubmit" class="flex w-full flex-col md:w-2/4">
@@ -137,8 +139,6 @@ async function onSubmit() {
         </fieldset>
         <p role="alert" class="hidden text-red-500 peer-invalid:block">{{ error }}</p>
       </form>
-
-      <div class="hidden md:block"></div>
       <div class="flex w-full flex-col items-center justify-center md:px-6">
         <div
           v-if="!loading && loadError"
