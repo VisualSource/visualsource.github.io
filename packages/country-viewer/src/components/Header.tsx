@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 
 const Header: React.FC = () => {
-    const [mode, setMode] = useState<"dark" | "light">(localStorage.getItem("theme") ?? window.matchMedia("(perfers-color-scheme: dark)").matches ? "dark" : "light");
+    const [mode, setMode] = useState<"dark" | "light">(localStorage.getItem("theme") ?? window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark");
 
     return (
         <header className="flex justify-between items-center min-h-16 h-16 px-4 md:px-16 shadow bg-card">

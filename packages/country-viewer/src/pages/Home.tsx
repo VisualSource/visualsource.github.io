@@ -74,7 +74,7 @@ const Home: React.FC = () => {
                     </SelectContent>
                 </Select>
             </nav>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-row-none gap-10 md:gap-16 pb-14 px-10 md:p-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-row-none gap-10 md:gap-16 pb-14 px-10 md:p-0 md:pb-4">
                 <StateHandler loading={isLoading} error={isError} data={data} />
             </div>
         </div>

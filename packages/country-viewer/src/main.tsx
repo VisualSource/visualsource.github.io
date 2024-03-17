@@ -22,13 +22,8 @@ const theme = localStorage.getItem("county-viewer-theme") ?? "system";
 
 const darkmode = window.matchMedia("(prefers-color-scheme: dark)");
 
-darkmode.addEventListener("change", (ev) => {
-  console.log("HELLO");
-  if (ev.matches) {
-    document.body.classList.add("dark");
-  } else {
-    document.body.classList.remove("dark");
-  }
+darkmode.addEventListener("change", () => {
+  document.body.classList.toggle("dark");
 });
 
 window.addEventListener("DOMContentLoaded", () => {
