@@ -20,18 +20,32 @@ const router = createBrowserRouter(
 
 const theme = localStorage.getItem("county-viewer-theme") ?? "system";
 
-switch (theme) {
-  case "system":
-    if (window.matchMedia("(perfers-color-scheme: dark)").matches) {
-      document.body.classList.add("dark");
-    }
-    break;
-  case "dark":
+const darkmode = window.matchMedia("(prefers-color-scheme: dark)");
+
+darkmode.addEventListener("change", (ev) => {
+  console.log("HELLO");
+  if (ev.matches) {
     document.body.classList.add("dark");
-    break;
-  default:
-    break;
-}
+  } else {
+    document.body.classList.remove("dark");
+  }
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("HELLO", theme, darkmode);
+  switch (theme) {
+    case "system":
+      if (darkmode.matches) {
+        document.body.classList.add("dark");
+      }
+      break;
+    case "dark":
+      document.body.classList.add("dark");
+      break;
+    default:
+      break;
+  }
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

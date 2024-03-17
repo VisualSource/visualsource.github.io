@@ -16,6 +16,8 @@ input
 */
 @layer base {
   :root {
+    color-scheme: light dark;
+
     --font-sans: "Nunito Sans";
     --background: 0, 0%, 98%;
     --foreground: 200, 15%, 8%;
