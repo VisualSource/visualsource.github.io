@@ -1,13 +1,15 @@
 <script lang="ts">
     import { base } from "$app/paths";
     import {page} from '$app/stores';
+    import {normalize} from './utils';
+
     let show = false;
 
     const content = [
-        { path: `${base}`, name: "home" },
-        { path: `${base}/destination`, name: "destination", },
-        { path: `${base}/crew`, name: "crew", },
-        { path: `${base}/technology`, name: "technology"}
+        { path: normalize(`${base}/`), name: "home" },
+        { path: normalize(`${base}/destination`), name: "destination", },
+        { path: normalize(`${base}/crew`), name: "crew", },
+        { path: normalize(`${base}/technology`), name: "technology"}
     ];
 
     let currentRoute = $page.url.pathname;
