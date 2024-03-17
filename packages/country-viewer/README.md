@@ -63,7 +63,7 @@ window.matchMedia("(perfers-color-scheme: dark)").matches;
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+future projects i'd like to continue to work with react as so far it is my faviorte framework to work with and i plan to use it more in the future.
 
 ### Useful resources
 
