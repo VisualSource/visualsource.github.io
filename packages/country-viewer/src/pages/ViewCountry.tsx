@@ -17,7 +17,6 @@ const CountyBoarders: React.FC<{ borders: string | undefined }> = ({
     queryKey: ["COUNTY_BOARDS", borders],
     enabled: !!borders,
     queryFn: async ({ queryKey }) => {
-      await new Promise((ok) => setTimeout(ok, 10000));
       return fetch(
         `https://restcountries.com/v3.1/alpha?codes=${queryKey.at(1)}&fields=name,ccn3`,
       ).then((e) => e.json() as Promise<Boarder[]>);
