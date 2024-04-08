@@ -1,0 +1,3 @@
+[submodule "packages/react-use-paho-mqtt"]
+	path = packages/react-use-paho-mqtt
+	url = https://github.com/VisualSource/react-use-paho-mqtt.git

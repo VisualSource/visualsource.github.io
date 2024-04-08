@@ -4,7 +4,7 @@
   "description": "",
   "main": "./dist/index.html",
   "scripts": {
-    "build": "pnpm -r --parallel run build",
+    "build": "pnpm -r --parallel run build -- --remote",
     "build-link": "node ./scripts/github-pages.mjs"
   },
   "keywords": [],

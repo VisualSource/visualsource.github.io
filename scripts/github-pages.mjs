@@ -53,6 +53,11 @@ try {
   const links = [];
 
   for (const project of projects) {
+    const screen_shot = join(INPUT_DIR, `${project}/screenshot.png`);
+    if (!existsSync(screen_shot)) {
+      continue;
+    }
+
     const url = `/${project}`;
     const name = project
       .split("-")
@@ -64,10 +69,7 @@ try {
       })
       .join(" ");
 
-    await copyFile(
-      join(INPUT_DIR, `${project}/screenshot.png`),
-      join(OUTPUT_SCREENSHOTS, `${project}.png`)
-    );
+    await copyFile(screen_shot, join(OUTPUT_SCREENSHOTS, `${project}.png`));
 
     let item = list_item
       .replace("{{ project_name }}", name)
