@@ -1,3 +1,6 @@
 [submodule "packages/react-use-paho-mqtt"]
 	path = packages/react-use-paho-mqtt
 	url = https://github.com/VisualSource/react-use-paho-mqtt.git
+[submodule "packages/r6random"]
+	path = packages/r6random
+	url = https://github.com/VisualSource/r6random
