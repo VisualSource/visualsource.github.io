@@ -45,6 +45,8 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+      - name: install deep dependecies
+        run: cd ./packages/r6random && pnpm i && cd ../../
       - name: install frontend dependencies
         run: pnpm install
       - name: Build pages
