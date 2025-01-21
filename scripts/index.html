@@ -106,6 +106,10 @@
         width: 100%;
         -webkit-font-smoothing: antialiased;
       }
+      #links_content {
+        width: 100%;
+        -webkit-font-smoothing: antialiased;
+      }
       section img {
         max-width: 100%;
       }
@@ -124,6 +128,13 @@
           0 1px 1px rgba(0, 0, 0, 0.1),
           0 0 5px rgba(181, 232, 83, 0.1),
           0 0 10px rgba(181, 232, 83, 0.1);
+      }
+
+      #links_content h1 {
+        font-size: 30px;
+      }
+      #links_content h2 {
+        font-size: 24px;
       }
 
       #main_content h1 {
@@ -246,7 +257,7 @@
         <a id="a-title" href="/">
           <h1>VisualSource</h1>
         </a>
-        <h2>Collection of projects</h2>
+        <h2>Collection of my projects</h2>
 
         <section id="downloads">
           <a href="https://github.com/VisualSource" class="btn btn-github"
@@ -259,9 +270,11 @@
     <main class="container">
       <section id="main_content">
         <h1>Projects</h1>
-        <ul>
-          {{ content }}
-        </ul>
+        <ul>{{mainContent}}</ul>
+      </section>
+      <section id="links_content">
+        <h1>Links</h1>
+        <ul>{{linksContent}}</ul>
       </section>
     </main>
   </body>
