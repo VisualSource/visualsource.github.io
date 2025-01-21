@@ -65,7 +65,7 @@ try {
     encoding: "utf-8"
   });
   const file = html.replace("{{mainContent}}", imageContent).replace("{{linksContent}}", linkContent);
-  await writeFile(paths.OUTPUTS.HTML, file);
+  await writeFile(join(paths.OUTPUTS.DIR,paths.OUTPUTS.HTML), file);
 } catch (error) {
   console.error(error);
   process.exit(1);
