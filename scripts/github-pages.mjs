@@ -14,7 +14,7 @@ var paths = {
   OUTPUTS: {
     DIR: reslove("../dist"),
     SCREENSHOTS: "screenshots",
-    HTML: reslove("index.html")
+    HTML: "index.html"
   }
 };
 var imageItem = `
